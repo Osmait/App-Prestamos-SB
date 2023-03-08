@@ -1,29 +1,29 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HealthCheckControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @LocalServerPort
+    private int port;
+
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @Test
-    void healthCheckTest()throws Exception {
-        this.mockMvc.perform(get("/health-check")).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Server Up")));
-
+    public void healthCheckTest() {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/health-check", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Server Up", response.getBody());
     }
+
+
 }
