@@ -1,36 +1,31 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
-import com.Prestamos.PrestamosSB.domain.User;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 class UserControllerTest {
 
-    @LocalServerPort
-    private int port;
+    @Autowired
+    private MockMvc mockMvc;
 
-    private  final TestRestTemplate restTemplate = new TestRestTemplate();
 
 
     @Test
-   public void getUser() {
-        ResponseEntity<User[]> response = restTemplate.getForEntity("http://localhost:"+ port + "/user",User[].class);
-
-
-
-        System.out.println(Arrays.toString(response.getBody()));
-        assertEquals(HttpStatus.OK,response.getStatusCode());
+   public void getUser() throws Exception {
+    mockMvc.perform(get("/user"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$").isArray());
 
 
 
