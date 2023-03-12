@@ -2,6 +2,8 @@ package com.Prestamos.PrestamosSB.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -23,6 +25,9 @@ public class Client {
 
     @Column(name = "user_id")
     private  Long userId;
+
+    @OneToMany(mappedBy = "client")
+    private List<Prestamo> prestamos;
 
     @ManyToOne
     @JoinColumn(name = "user_id",insertable = false,updatable = false)
