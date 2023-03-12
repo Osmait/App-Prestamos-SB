@@ -21,15 +21,23 @@ public class Client {
     @Column(length = 20)
     private  String phoneNumber;
 
+    @Column(name = "user_id")
+    private  Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",insertable = false,updatable = false)
+    private User user;
+
     public Client() {
     }
 
-    public Client( String name, String lastName, String email, String phoneNumber) {
+    public Client( String name, String lastName, String email, String phoneNumber,Long userId) {
 
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.userId = userId;
     }
 
     public Long getId() {

@@ -23,7 +23,7 @@ class ClientCreatorTest {
 
     @Test
     void create() {
-        Client client = new Client("saul", "burgos","saulburgos6@gmail.com", "12345678");
+        Client client = new Client("saul", "burgos","saulburgos6@gmail.com", "12345678" , 1L);
         clientCreator.create(client);
 
         Mockito.verify(clientRepository,Mockito.times(1)).save(client);

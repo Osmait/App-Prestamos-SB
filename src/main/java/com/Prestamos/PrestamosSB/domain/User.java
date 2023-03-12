@@ -2,6 +2,8 @@ package com.Prestamos.PrestamosSB.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -21,6 +23,9 @@ public class User {
 
     @Column(length = 50)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Client> clients;
 
     public User() {
 

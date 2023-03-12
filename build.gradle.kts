@@ -19,7 +19,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 
-//	implementation("io.github.cdimascio:dotenv-java:5.1.0")
+	implementation("me.paulschwarz:spring-dotenv:2.3.0")
 
 //	Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -26,9 +26,9 @@ class FindClientTest {
     void findAllClient() {
         List<Client> clientList = new ArrayList<>();
 
-        Client client1 = new Client("joseSAul", "burgos","saulburgos7@gmail.com","80945783454");
+        Client client1 = new Client("joseSAul", "burgos","saulburgos7@gmail.com","80945783454",1L);
 
-        Client client2 = new Client("saul", "burgos","saulburgos6@gmail.com","80945323454");
+        Client client2 = new Client("saul", "burgos","saulburgos6@gmail.com","80945323454",1L);
         clientList.add(client1);
         clientList.add(client2);
 

@@ -21,4 +21,10 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
+        env:
+          DB_PORT: 5432
+          DB_DATABASE: my_store
+          DB_USER: osmait
+          DB_PASSWORD: admin123
+          DB_HOSTNAME: localhost
 
