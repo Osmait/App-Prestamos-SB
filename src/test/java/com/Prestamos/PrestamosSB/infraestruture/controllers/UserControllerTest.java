@@ -15,17 +15,17 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 class UserControllerTest {
 
-//    @Autowired
-//    private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
 
 
     @Test
    public void getUser() throws Exception {
-//    mockMvc.perform(get("/user"))
-//            .andExpect(status().isOk())
-//            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//            .andExpect(jsonPath("$").isArray());
+    mockMvc.perform(get("/user"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$").isArray());
 
 
 
