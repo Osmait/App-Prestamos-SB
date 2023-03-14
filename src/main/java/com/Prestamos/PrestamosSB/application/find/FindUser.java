@@ -19,4 +19,8 @@ public class FindUser {
         userRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
+
+    public User findByEmail(String email){
+        return userRepository.findOneByEmail(email).get();
+    }
 }

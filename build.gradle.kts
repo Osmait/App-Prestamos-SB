@@ -14,12 +14,17 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 
 	implementation("me.paulschwarz:spring-dotenv:2.3.0")
+
+
+//	JWT
+	implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")// or 'io.jsonwebtoken:jjwt-gson:0.11.5' for gson
 
 //	Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
