@@ -21,6 +21,6 @@ public class FindUser {
     }
 
     public User findByEmail(String email){
-        return userRepository.findOneByEmail(email).get();
+        return userRepository.findOneByEmail(email).orElseThrow();
     }
 }
