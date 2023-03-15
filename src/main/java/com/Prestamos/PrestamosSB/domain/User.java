@@ -16,17 +16,18 @@ public class User  implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 50)
+    @Column()
     private String name;
 
-    @Column(name = "last_name", length = 50)
+    @Column(name = "last_name")
     private String lastName;
 
 
-    @Column(length = 50)
+
+    @Column(unique = true)
     private String email;
 
-    @Column(length = 50)
+    @Column()
     private String password;
 
     @OneToMany(mappedBy = "user")

@@ -37,6 +37,7 @@ public class WebSecurityConfig  {
                 .authorizeHttpRequests()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/health-check").permitAll()
+                .requestMatchers("/login/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
