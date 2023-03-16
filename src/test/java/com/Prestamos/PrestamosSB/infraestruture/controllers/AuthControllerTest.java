@@ -2,6 +2,7 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.UserCreator;
 import com.Prestamos.PrestamosSB.domain.User;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class AuthControllerTest {
 
     @Autowired
