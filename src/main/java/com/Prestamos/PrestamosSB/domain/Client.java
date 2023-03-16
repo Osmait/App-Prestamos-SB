@@ -29,6 +29,8 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Prestamo> prestamos;
 
+
+
     @ManyToOne
     @JoinColumn(name = "user_id",insertable = false,updatable = false)
     private User user;
@@ -83,6 +85,14 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

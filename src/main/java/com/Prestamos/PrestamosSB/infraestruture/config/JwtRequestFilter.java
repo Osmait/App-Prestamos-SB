@@ -60,6 +60,8 @@ public class JwtRequestFilter  extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+
+
             }
         }
         filterChain.doFilter(request, response);
