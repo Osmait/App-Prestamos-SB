@@ -5,6 +5,7 @@ import com.Prestamos.PrestamosSB.application.find.FindUser;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,16 +21,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
 
     private final UserCreator userCreator;
     private final FindUser findUser;
 
-    public UserController(UserCreator userCreator, FindUser findUser) {
-        this.userCreator = userCreator;
-        this.findUser = findUser;
-    }
+
 
     @GetMapping("/user")
     public ResponseEntity<List<User>> getUser(){

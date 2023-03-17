@@ -36,8 +36,32 @@ class UserControllerTest {
     public void badRequest() throws  Exception{
         for (String body:fieldData) {
 
-            mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isBadRequest());
+            if (!body.contains("password")){
+                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest())
+                        .andExpect(content().json("{\"password\":\"password is require\"}"));
+
+            }
+
+            if (!body.contains("name")){
+                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest())
+                        .andExpect(content().json("{\"name\":\"Name is require\"}"));
+
+            }
+            if (!body.contains("email")){
+                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest())
+                        .andExpect(content().json("{\"email\":\"Email is require\"}"));
+
+            }
+            if (!body.contains("lastName")){
+                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest())
+                        .andExpect(content().json("{\"lastName\":\"LastName is require\"}"));
+
+            }
+
 
 
         }

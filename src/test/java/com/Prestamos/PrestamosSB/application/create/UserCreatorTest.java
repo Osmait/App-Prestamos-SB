@@ -23,7 +23,7 @@ class UserCreatorTest {
 
     @Test
     void create() {
-        User user = new User("saul", "burgos","saulburgos6@gmail.com", "12345678");
+        User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         userCreator.create(user);
 
         Mockito.verify(userRepository,Mockito.times(1)).save(user);

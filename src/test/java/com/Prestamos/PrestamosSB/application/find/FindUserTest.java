@@ -27,8 +27,8 @@ class FindUserTest {
     void findAllUser() {
         List<User> userList = new ArrayList<>();
 
-        User user1 = new User("saul", "burgos","saulburgos6@gmail.com", "12345678");
-        User user2 = new User("jose", "burgos","joseburgos6@gmail.com", "12345678");
+        User user1 = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+        User user2 = User.builder().email("joseburgos6@gmail.com").name("jose").lastName("burgos").password("12345678").build();
         userList.add(user1);
         userList.add(user2);
 

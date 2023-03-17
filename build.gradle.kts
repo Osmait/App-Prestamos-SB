@@ -23,6 +23,17 @@ dependencies {
 
 	implementation("me.paulschwarz:spring-dotenv:2.3.0")
 
+//Lombok
+	compileOnly ("org.projectlombok:lombok:1.18.26")
+	annotationProcessor ("org.projectlombok:lombok:1.18.26")
+
+	testCompileOnly ("org.projectlombok:lombok:1.18.26")
+	testAnnotationProcessor ("org.projectlombok:lombok:1.18.26")
+
+
+
+
+
 
 //	JWT
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")

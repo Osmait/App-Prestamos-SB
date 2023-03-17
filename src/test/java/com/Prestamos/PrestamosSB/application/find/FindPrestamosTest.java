@@ -36,7 +36,7 @@ class FindPrestamosTest {
 
         Mockito.when(prestamoRepository.findAll()).thenReturn(prestamoList);
 
-        List<Prestamo> result= findPrestamos.FindPrestamos();
+        List<Prestamo> result= findPrestamos.FindAllPrestamos();
 
         assertEquals(prestamoList.size(),result.size());
         assertEquals(prestamoList.get(0),result.get(0));

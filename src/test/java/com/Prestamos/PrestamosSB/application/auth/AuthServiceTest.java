@@ -35,7 +35,7 @@ class AuthServiceTest {
     @Test
     void authenticate() {
         AuthRequest request = new AuthRequest("prueba@gmail.com","123456");
-        User user = new User("saul", "burgos","saulburgos6@gmail.com", "12345678");
+        User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
 
         Mockito.when(userRepository.findOneByEmail(request.getEmail())).thenReturn(Optional.of(user));

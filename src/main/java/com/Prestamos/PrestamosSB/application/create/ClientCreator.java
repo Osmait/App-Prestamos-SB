@@ -3,17 +3,19 @@ package com.Prestamos.PrestamosSB.application.create;
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ClientCreator {
 
-    @Autowired
-    private ClientRepository clientRepository;
 
-    @Autowired
-    private AuthService authService;
+    private final ClientRepository clientRepository;
+
+
+    private final AuthService authService;
 
     public  void  create(Client client){
 

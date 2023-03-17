@@ -41,7 +41,7 @@ class ClientControllerTest {
 
     @BeforeEach
     void setUp(){
-        user = new User("saul", "burgos", "saulburgos6@gmail.com", "12345678");
+        user =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }

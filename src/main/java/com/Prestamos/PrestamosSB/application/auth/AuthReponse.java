@@ -1,6 +1,8 @@
 package com.Prestamos.PrestamosSB.application.auth;
 
 
+import lombok.Data;
+
 
 public class AuthReponse {
     private String token;
