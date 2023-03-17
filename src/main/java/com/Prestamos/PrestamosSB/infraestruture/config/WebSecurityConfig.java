@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.infraestruture.config;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class WebSecurityConfig  {
 
 
-    @Autowired
-    private JwtRequestFilter JwtRequestFilter;
+    private final JwtRequestFilter JwtRequestFilter;
 
-    @Autowired
     private final AuthenticationProvider authenticationProvider;
 
-    public WebSecurityConfig(AuthenticationProvider authenticationProvider) {
-        this.authenticationProvider = authenticationProvider;
-    }
+
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

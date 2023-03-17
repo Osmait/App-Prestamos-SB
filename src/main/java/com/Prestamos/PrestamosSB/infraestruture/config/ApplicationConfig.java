@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.infraestruture.config;
 
 import com.Prestamos.PrestamosSB.domain.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
+@RequiredArgsConstructor
 public class ApplicationConfig {
 
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Bean
     UserDetailsService userDetailsService(){

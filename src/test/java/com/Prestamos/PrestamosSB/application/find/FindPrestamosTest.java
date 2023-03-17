@@ -28,8 +28,9 @@ class FindPrestamosTest {
     void findPrestamos() {
         List<Prestamo> prestamoList= new ArrayList<>();
 
-        Prestamo prestamo1 = new Prestamo(1000.00,1L);
-        Prestamo prestamo2 = new Prestamo(10100.00,2L);
+        Prestamo prestamo1 = Prestamo.builder().monto(10100.00).clientId(2L).build();
+
+        Prestamo prestamo2 =Prestamo.builder().monto(1000.00).clientId(2L).build();
 
         prestamoList.add(prestamo1);
         prestamoList.add(prestamo2);
