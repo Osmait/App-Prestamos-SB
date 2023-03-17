@@ -11,11 +11,14 @@ import org.springframework.stereotype.Component;
 public class UserDto {
 
     @NotNull(message = "Name is require")
+    @Size(min = 1,max = 50)
     private String name;
     @NotNull(message = "Last Name  is require")
+    @Size(min = 1,max = 50)
     private String lastName;
     @Email(message = "the field not is a email")
     @NotNull(message = "Email is require")
+    @Size(min = 1,max = 50)
     private String email;
     @NotNull(message = "password is require")
     @Size(min = 6, max = 20, message = "Password length  min 6")
