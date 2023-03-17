@@ -21,7 +21,12 @@ public class UserCreator {
     public void create( User user){
         String passwordEncode = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncode);
-        System.out.println(passwordEncode);
-        userRepository.save(user);
+
+        try {
+            userRepository.save(user);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 }

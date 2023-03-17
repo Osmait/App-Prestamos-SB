@@ -42,4 +42,14 @@ class AuthControllerTest {
 
 
     }
+
+    @Test
+    void autenticateFail() throws Exception {
+
+        String body ="{\"email\": \"saulburgos@gmail.com\", \"password\": \"123456\"}";
+        mockMvc.perform(post("/login").content(body).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+
+
+    }
 }
