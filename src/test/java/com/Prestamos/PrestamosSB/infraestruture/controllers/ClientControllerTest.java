@@ -1,15 +1,12 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
-import com.Prestamos.PrestamosSB.application.auth.AuthReponse;
-import com.Prestamos.PrestamosSB.application.auth.AuthRequest;
-import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.application.create.UserCreator;
+
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +65,12 @@ class ClientControllerTest {
     }
 
     @Test
-    void createClient() {
+    void createClient() throws Exception {
+        String token =jwtService.generateToken(user);
+
+        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul10@gmail.com\", \"password\": \"12345678\"}";
+        mockMvc.perform(post("/client").header("Authorization","Bearer " + token).content(body).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
     }
 }
