@@ -21,6 +21,11 @@ public class ClientCreator {
 
        client.setUserId(currentUserId);
 
-        clientRepository.save(client);
+       try{
+           clientRepository.save(client);
+       }catch (Exception e ){
+           System.out.println("Error Insert Client In dataBase");
+       }
+
     }
 }

@@ -9,24 +9,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserCreator {
-    @Autowired
-    private final PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
 
-    public UserCreator(PasswordEncoder passwordEncoder) {
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+
+    public UserCreator(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     public void create( User user){
         String passwordEncode = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncode);
-
         try {
             userRepository.save(user);
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("Error Insert User");
         }
+
+
+
 
     }
 }

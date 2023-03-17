@@ -29,4 +29,5 @@ class UserCreatorTest {
         Mockito.verify(userRepository,Mockito.times(1)).save(user);
 
     }
+
 }

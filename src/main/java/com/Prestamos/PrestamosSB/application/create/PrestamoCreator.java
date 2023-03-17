@@ -12,7 +12,13 @@ public class PrestamoCreator {
     private PrestamoRepository prestamoRepository;
 
     public void create(Prestamo prestamo){
-        prestamoRepository.save(prestamo);
+
+        try {
+            prestamoRepository.save(prestamo);
+        }catch (Exception e){
+            System.out.println("Error Insert Prestamo");
+        }
+
     }
 }
 
