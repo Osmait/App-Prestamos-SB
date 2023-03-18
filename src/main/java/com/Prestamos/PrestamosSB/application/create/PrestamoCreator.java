@@ -1,9 +1,10 @@
 package com.Prestamos.PrestamosSB.application.create;
 
-import com.Prestamos.PrestamosSB.domain.Prestamo;
+import com.Prestamos.PrestamosSB.domain.Loan;
+
 import com.Prestamos.PrestamosSB.domain.PrestamoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,10 +14,10 @@ public class PrestamoCreator {
 
     private final PrestamoRepository prestamoRepository;
 
-    public void create(Prestamo prestamo){
+    public void create(Loan loan){
 
         try {
-            prestamoRepository.save(prestamo);
+            prestamoRepository.save(loan);
         }catch (Exception e){
             System.out.println("Error Insert Prestamo");
         }

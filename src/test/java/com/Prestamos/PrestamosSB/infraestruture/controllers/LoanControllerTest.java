@@ -1,12 +1,10 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
-
+import com.Prestamos.PrestamosSB.domain.ClientRepository;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.AfterEach;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +20,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-class ClientControllerTest {
+class LoanControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     private UserRepository userRepository;
+
 
     @Autowired
     private JwtService jwtService;
 
-   private User user;
+    private User user;
 
     @BeforeEach
     void setUp(){
@@ -42,22 +42,19 @@ class ClientControllerTest {
     }
 
     @Test
-    void getClient() throws Exception {
-    String token =jwtService.generateToken(user);
-
-        mockMvc.perform(get("/client").header("Authorization","Bearer " + token))
+    void getAllLoanByClientId() throws Exception {
+        String token = jwtService.generateToken(user);
+        mockMvc.perform(get("/loan/1").header("Authorization","Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isArray());
     }
 
     @Test
-    void createClient() throws Exception {
-        String token =jwtService.generateToken(user);
-
-        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul10@gmail.com\", \"password\": \"12345678\"}";
-        mockMvc.perform(post("/client").header("Authorization","Bearer " + token).content(body).contentType(MediaType.APPLICATION_JSON))
+    void createLoan() throws Exception {
+        String token = jwtService.generateToken(user);
+        String body = "{\"amount\": \"1500.00\", \"clientId\": \"2\"}";
+        mockMvc.perform(post("/loan").header("Authorization","Bearer " + token).content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-
     }
 }

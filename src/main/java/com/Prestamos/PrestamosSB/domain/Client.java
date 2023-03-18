@@ -35,9 +35,7 @@ public class Client {
     private  Long userId;
 
     @OneToMany(mappedBy = "client")
-    private List<Prestamo> prestamos;
-
-
+    private List<Loan> prestamos;
 
     @ManyToOne
     @JoinColumn(name = "user_id",insertable = false,updatable = false)
