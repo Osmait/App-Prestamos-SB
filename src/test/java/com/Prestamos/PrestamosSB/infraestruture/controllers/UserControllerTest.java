@@ -13,8 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,49 +23,24 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    String[] fieldData = {
-            "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul@gmail.com\"}",
-            "{\"name\": \"saul\", \"lastName\": \"burgos\", \"password\": \"12345678\"}",
-            "{\"lastName\": \"burgos\",\"email\": \"saul@gmail.com\", \"password\": \"12345678\"}",
-            "{\"name\": \"saul\", \"email\": \"saul@gmail.com\", \"password\": \"12345678\"}"
 
-    };
 
     @Test
     public void badRequest() throws  Exception{
-        for (String body:fieldData) {
 
-            if (!body.contains("password")){
-                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
+        String[][] fieldData = {
+                {"{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul@gmail.com\"}","{\"password\":\"password is require\"}"},
+                {"{\"name\": \"saul\", \"lastName\": \"burgos\", \"password\": \"12345678\"}","{\"email\":\"Email is require\"}"},
+                {"{\"lastName\": \"burgos\",\"email\": \"saul@gmail.com\", \"password\": \"12345678\"}","{\"name\":\"Name is require\"}"},
+                {"{\"name\": \"saul\", \"email\": \"saul@gmail.com\", \"password\": \"12345678\"}","{\"lastName\":\"LastName is require\"}"}
+        };
+
+        for (String[] body:fieldData) {
+                mockMvc.perform(post("/user").content(body[0]).contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isBadRequest())
-                        .andExpect(content().json("{\"password\":\"password is require\"}"));
-
-            }
-
-            if (!body.contains("name")){
-                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isBadRequest())
-                        .andExpect(content().json("{\"name\":\"Name is require\"}"));
-
-            }
-            if (!body.contains("email")){
-                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isBadRequest())
-                        .andExpect(content().json("{\"email\":\"Email is require\"}"));
-
-            }
-            if (!body.contains("lastName")){
-                mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isBadRequest())
-                        .andExpect(content().json("{\"lastName\":\"LastName is require\"}"));
-
-            }
-
-
-
+                        .andExpect(content().json(body[1]));
         }
     }
-
 
     @Test
    public void getUser() throws Exception {
@@ -79,21 +53,13 @@ class UserControllerTest {
 
     }
 
-
     @Test
     void testCreateUser() throws Exception {
         String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul@gmail.com\", \"password\": \"12345678\"}";
 
         mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(content().string(""))
-        ;
+                .andExpect(content().string(""));
 
     }
-
-
-
-
-
-
 }
