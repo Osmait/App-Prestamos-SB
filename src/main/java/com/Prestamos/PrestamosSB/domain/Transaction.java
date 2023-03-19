@@ -1,41 +1,42 @@
 package com.Prestamos.PrestamosSB.domain;
 
+import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-@Table(name = "loan")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Loan {
+@Entity
+@Table(name = "transaction")
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
+    private Long id;
+
+    @Column(name = "transaction_type")
+    private TransactionType transactionType;
 
     private Double amount;
 
     @Column(name = "create_at")
-    @CreationTimestamp
     private LocalDateTime CreateAt;
+    @Column(name = "loan_id")
+    private Long loanId;
 
-    @Column(name = "client_id")
-    private Long clientId;
+    @ManyToOne()
+    @JoinColumn(name = "loan_id", insertable = false,updatable = false)
+    private Loan loan;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id",insertable = false,updatable = false)
-    private Client client;
 
-    @OneToMany(mappedBy = "loan")
-    private List<Transaction> transactions;
+
+
 
 
 
