@@ -3,10 +3,12 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import com.Prestamos.PrestamosSB.application.create.TransactionCreator;
 import com.Prestamos.PrestamosSB.application.find.FindTransaction;
 import com.Prestamos.PrestamosSB.domain.Transaction;
+import com.Prestamos.PrestamosSB.infraestruture.Dto.TransactionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -21,8 +23,9 @@ public class TransactionController {
 
 
     @PostMapping("/transaction")
-    public ResponseEntity<HttpStatus>createTransactions(@RequestBody Transaction request){
-        transactionCreator.create(request);
+    public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request){
+        Transaction transaction =  request.getTransactionFromDto();
+        transactionCreator.create(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

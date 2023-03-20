@@ -7,7 +7,6 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component
 public class LoanDto {
 
     @NotNull(message = "amount is require")
