@@ -3,6 +3,7 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import com.Prestamos.PrestamosSB.application.create.PrestamoCreator;
 import com.Prestamos.PrestamosSB.application.find.FindPrestamos;
 import com.Prestamos.PrestamosSB.domain.Loan;
+import com.Prestamos.PrestamosSB.infraestruture.Dto.LoanDto;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,9 @@ public class LoanController {
     }
 
     @PostMapping("/loan")
-    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody Loan loanRequest){
-        prestamoCreator.create(loanRequest);
+    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
+       Loan loan  = loanRequest.getLoanFromDto();
+        prestamoCreator.create(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -34,7 +34,7 @@ public class Loan {
     @JoinColumn(name = "client_id",insertable = false,updatable = false)
     private Client client;
 
-    @OneToMany(mappedBy = "loan")
+    @OneToMany(mappedBy = "loan",fetch =FetchType.EAGER ,cascade = CascadeType.REMOVE)
     private List<Transaction> transactions;
 
 
