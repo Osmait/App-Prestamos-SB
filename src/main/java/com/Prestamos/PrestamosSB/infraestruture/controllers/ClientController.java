@@ -3,6 +3,7 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import com.Prestamos.PrestamosSB.application.create.ClientCreator;
 import com.Prestamos.PrestamosSB.application.find.FindClient;
 import com.Prestamos.PrestamosSB.domain.Client;
+import com.Prestamos.PrestamosSB.domain.ClientRepository;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.ClientDto;
 import com.Prestamos.PrestamosSB.infraestruture.utils.ValidateBody;
 import lombok.RequiredArgsConstructor;

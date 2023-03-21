@@ -3,6 +3,7 @@ package com.Prestamos.PrestamosSB.application.find;
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
 import com.Prestamos.PrestamosSB.domain.Transaction;
 import com.Prestamos.PrestamosSB.domain.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
+@Transactional
 class FindTransactionTest {
 
     @MockBean

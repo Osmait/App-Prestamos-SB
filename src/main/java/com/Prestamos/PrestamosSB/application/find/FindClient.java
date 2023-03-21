@@ -18,6 +18,16 @@ public class FindClient {
 
     private final ClientRepository clientRepository;
 
+
+
+
+    public  Client findCLientById(Long id){
+
+        Client client =  clientRepository.findById(id).orElseThrow();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(client);
+        return client;
+    }
     public  List<Client>findAllClientByUserId(Long id){
         List<Client> list = new ArrayList<>();
 

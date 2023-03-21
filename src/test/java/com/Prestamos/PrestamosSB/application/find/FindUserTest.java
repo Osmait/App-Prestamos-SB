@@ -2,6 +2,7 @@ package com.Prestamos.PrestamosSB.application.find;
 
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+@Transactional
 class FindUserTest {
 
     @MockBean

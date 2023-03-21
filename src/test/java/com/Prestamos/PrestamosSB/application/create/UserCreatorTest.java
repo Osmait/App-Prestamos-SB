@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 
 @SpringBootTest
+@Transactional
 class UserCreatorTest {
 
 

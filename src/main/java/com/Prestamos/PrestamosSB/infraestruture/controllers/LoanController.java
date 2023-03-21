@@ -1,7 +1,9 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.PrestamoCreator;
+import com.Prestamos.PrestamosSB.application.find.FindClient;
 import com.Prestamos.PrestamosSB.application.find.FindPrestamos;
+import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.Loan;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.LoanDto;
 import jakarta.websocket.server.PathParam;
@@ -17,6 +19,7 @@ import java.util.List;
 public class LoanController {
 
     private  final PrestamoCreator prestamoCreator;
+    private  final FindClient findClient;
 
     private final FindPrestamos findPrestamos;
 
@@ -34,6 +37,8 @@ public class LoanController {
 
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
+        Client client = findClient.findCLientById(loanRequest.getClientId());
+        loanRequest.setClient(client);
        Loan loan  = loanRequest.getLoanFromDto();
         prestamoCreator.create(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);

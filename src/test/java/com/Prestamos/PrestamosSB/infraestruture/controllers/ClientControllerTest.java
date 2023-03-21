@@ -57,10 +57,17 @@ class ClientControllerTest {
                 .lastName("burgos")
                 .email("saulburgos7@gmail.com")
                 .phoneNumber("80945783454")
-                .userId(1L)
+                .user(user)
                 .build();
         clientRepository.save(client1);
     }
+
+    @AfterEach
+    void setDown(){
+        clientRepository.deleteAll();
+        userRepository.deleteAll();
+    }
+
 
     @Test
     void getClient() throws Exception {

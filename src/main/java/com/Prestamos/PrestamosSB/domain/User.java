@@ -38,8 +38,8 @@ public class User  implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-//    @OneToMany( fetch = FetchType.EAGER, mappedBy = "user",cascade = CascadeType.REMOVE)
-//    private List<Client> clients;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<Client> clients;
 
 
 

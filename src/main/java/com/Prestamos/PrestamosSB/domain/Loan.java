@@ -27,11 +27,10 @@ public class Loan {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @Column(name = "client_id")
-    private Long clientId;
+//    @Column(name = "client_id")
+//    private Long clientId;
 
     @ManyToOne
-    @JoinColumn(name = "client_id",insertable = false,updatable = false)
     private Client client;
 
 //    @OneToMany(mappedBy = "loan",fetch =FetchType.EAGER ,cascade = CascadeType.REMOVE)

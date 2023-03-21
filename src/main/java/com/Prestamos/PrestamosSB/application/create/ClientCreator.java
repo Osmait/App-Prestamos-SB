@@ -20,9 +20,9 @@ public class ClientCreator {
 
     public  void  create(Client client){
 
-       Long currentUserId =  authService.getIdCurrentLoggedUser();
+       User currentUserId =  authService.getIdCurrentLoggedUser();
         System.out.println(currentUserId);
-       client.setUserId(currentUserId);
+       client.setUser(currentUserId);
 
        try{
            clientRepository.save(client);

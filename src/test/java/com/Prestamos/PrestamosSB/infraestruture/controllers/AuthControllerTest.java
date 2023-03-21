@@ -33,6 +33,7 @@ class AuthControllerTest {
     }
 
 
+
     @Test
     void autenticate() throws Exception {
 

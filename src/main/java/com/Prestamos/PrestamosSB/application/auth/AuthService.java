@@ -39,11 +39,11 @@ public class AuthService {
         return new AuthReponse(token);
     }
 
-    public  Long getIdCurrentLoggedUser(){
+    public  User getIdCurrentLoggedUser(){
         Authentication auth  = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated()){
             return  null;
         }
-        return ((User) auth.getPrincipal()).getId();
+        return ((User) auth.getPrincipal());
     }
 }

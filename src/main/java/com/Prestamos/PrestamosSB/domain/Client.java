@@ -31,15 +31,14 @@ public class Client {
     @Column(length = 20)
     private  String phoneNumber;
 
-    @Column(name = "user_id")
-    private  Long userId;
+//    @Column(name = "user_id")
+//    private  Long userId;
 
-//    @OneToMany(mappedBy = "client")
-//    private List<Loan> prestamos;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<Loan> prestamos;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    private User user;
 
 
 }
