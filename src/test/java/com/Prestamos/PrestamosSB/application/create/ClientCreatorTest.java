@@ -30,7 +30,6 @@ class ClientCreatorTest {
                 .lastName("burgos")
                 .email("saulburgos6@gmail.com")
                 .phoneNumber("12345678")
-                .userId(1L)
                 .build();
         clientCreator.create(client);
 

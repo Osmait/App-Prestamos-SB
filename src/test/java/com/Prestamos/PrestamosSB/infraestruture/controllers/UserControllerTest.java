@@ -43,7 +43,7 @@ class UserControllerTest {
     }
 
     @Test
-   public void getUser() throws Exception {
+    public void getUser() throws Exception {
     mockMvc.perform(get("/user"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))

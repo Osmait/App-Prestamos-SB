@@ -19,10 +19,10 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 50)
+    @Column(length = 50 ,nullable = false)
     private String name;
 
-    @Column(name = "last_name",length = 50)
+    @Column(name = "last_name",length = 50 , nullable = false)
     private String lastName;
 
     @Column(length = 50)
@@ -34,12 +34,12 @@ public class Client {
     @Column(name = "user_id")
     private  Long userId;
 
-    @OneToMany(mappedBy = "client")
-    private List<Loan> prestamos;
+//    @OneToMany(mappedBy = "client")
+//    private List<Loan> prestamos;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id",insertable = false,updatable = false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
 
 }

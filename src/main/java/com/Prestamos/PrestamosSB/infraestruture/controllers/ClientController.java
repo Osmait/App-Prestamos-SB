@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -28,9 +25,11 @@ public class ClientController {
     private final FindClient findClient;
 
 
-    @GetMapping("/client")
-    public ResponseEntity<List<Client>>getClient(){
-        List<Client> clientList = findClient.findAllClient();
+    @GetMapping("/client/{id}")
+    public ResponseEntity<List<Client>>getClient(@PathVariable Long id){
+
+        List<Client> clientList = findClient.findAllClientByUserId(id);
+        System.out.println(clientList);
         return new ResponseEntity<>(clientList, HttpStatus.OK);
 
     }
@@ -38,6 +37,7 @@ public class ClientController {
     @PostMapping("/client")
     public ResponseEntity<Map<String, String>> createClient(@Validated @RequestBody ClientDto clientRequest, BindingResult result){
         if (result.hasErrors()){
+
          return ValidateBody.ValidFilds(result);
         }
 

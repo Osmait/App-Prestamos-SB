@@ -22,4 +22,10 @@ public class FindPrestamos {
         prestamoList =  prestamoRepository.findAllByClientId(id).orElse(new ArrayList<>());
         return  prestamoList;
     }
+    public List<Loan> FindLoan(){
+        List<Loan> prestamoList;
+        prestamoList =  prestamoRepository.findLoan().orElse(new ArrayList<>());
+        return  prestamoList;
+    }
+
 }

@@ -18,10 +18,19 @@ public class FindClient {
 
     private final ClientRepository clientRepository;
 
-    public  List<Client>findAllClient(){
-        List<Client> listClient = new ArrayList<>();
+    public  List<Client>findAllClientByUserId(Long id){
+        List<Client> list = new ArrayList<>();
 
-        clientRepository.findAll().iterator().forEachRemaining(listClient::add);
-        return listClient;
+    try{
+        clientRepository.findAllByUserId(id).iterator().forEachRemaining(list::add);
+    }catch (Exception e){
+        System.out.println("Error al buscar clients");
+    }
+
+
+    return list;
+
+
+
     }
 }

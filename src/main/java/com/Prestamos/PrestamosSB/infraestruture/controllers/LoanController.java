@@ -26,6 +26,12 @@ public class LoanController {
             return ResponseEntity.ok().body(loanList);
     }
 
+    @GetMapping("/loan/")
+    public ResponseEntity<List<Loan>>getLoan(){
+        List<Loan> loanList = findPrestamos.FindLoan();
+        return ResponseEntity.ok().body(loanList);
+    }
+
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
        Loan loan  = loanRequest.getLoanFromDto();

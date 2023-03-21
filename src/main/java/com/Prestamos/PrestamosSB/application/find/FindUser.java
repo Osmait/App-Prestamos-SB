@@ -19,6 +19,7 @@ public class FindUser {
     public List<User>findAllUser(){
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
+        System.out.println(list);
         return list;
     }
 
