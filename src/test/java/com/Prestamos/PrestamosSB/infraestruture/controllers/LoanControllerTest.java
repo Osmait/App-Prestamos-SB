@@ -66,7 +66,7 @@ class LoanControllerTest {
 
     @AfterEach
     void setDown(){
-        userLoan = null;
+
         userRepository.deleteAll();
         clientRepository.deleteAll();
     }

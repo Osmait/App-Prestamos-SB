@@ -54,7 +54,7 @@ class TransactionControllerTest {
 
     @AfterEach
     void setDown(){
-        userT = null;
+
         userRepository.deleteAll();
 
     }
