@@ -1,7 +1,9 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.TransactionCreator;
+import com.Prestamos.PrestamosSB.application.find.FindPrestamos;
 import com.Prestamos.PrestamosSB.application.find.FindTransaction;
+import com.Prestamos.PrestamosSB.domain.Loan;
 import com.Prestamos.PrestamosSB.domain.Transaction;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.TransactionDto;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,15 @@ public class TransactionController {
 
     private final TransactionCreator transactionCreator;
 
+    private final FindPrestamos findPrestamos;
+
 
 
     @PostMapping("/transaction")
     public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request){
+
+        Loan loan = findPrestamos.findLoanById(request.getLoanId());
+        request.setLoan(loan);
         Transaction transaction =  request.getTransactionFromDto();
         transactionCreator.create(transaction);
         return new ResponseEntity<>(HttpStatus.CREATED);

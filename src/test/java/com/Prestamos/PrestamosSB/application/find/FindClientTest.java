@@ -49,7 +49,7 @@ class FindClientTest {
         clientList.add(client1);
         clientList.add(client2);
 
-        Mockito.when(clientRepository.findAll()).thenReturn(clientList);
+        Mockito.when(clientRepository.findAllByUserId(1L)).thenReturn(clientList);
 
         List<Client> result = findClient.findAllClientByUserId(1L);
         assertEquals(clientList.size(),result.size());

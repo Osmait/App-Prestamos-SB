@@ -29,11 +29,10 @@ public class Transaction {
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
-    @Column(name = "loan_id")
-    private Long loanId;
+//    @Column(name = "loan_id")
+//    private Long loanId;
 
     @ManyToOne()
-    @JoinColumn(name = "loan_id", insertable = false,updatable = false)
     private Loan loan;
 
 

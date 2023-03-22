@@ -31,11 +31,6 @@ public class Client {
     @Column(length = 20)
     private  String phoneNumber;
 
-//    @Column(name = "user_id")
-//    private  Long userId;
-
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private List<Loan> prestamos;
 
     @ManyToOne
     private User user;

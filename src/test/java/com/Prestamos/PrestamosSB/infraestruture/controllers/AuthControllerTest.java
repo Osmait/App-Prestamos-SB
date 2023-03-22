@@ -2,7 +2,9 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.UserCreator;
 import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.UserRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +26,20 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
    @Autowired
-   UserCreator userCreator;
+    private UserCreator userCreator;
+
+   @Autowired
+   private UserRepository userRepository;
 
     @BeforeEach
     void setUp(){
         User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         userCreator.create(user);
+    }
+
+    @AfterEach
+    void setDown(){
+        userRepository.deleteAll();
     }
 
 

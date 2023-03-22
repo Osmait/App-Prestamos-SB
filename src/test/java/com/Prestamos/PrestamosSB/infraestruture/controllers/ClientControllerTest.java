@@ -7,8 +7,8 @@ import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,40 +41,40 @@ class ClientControllerTest {
     @Autowired
     private JwtService jwtService;
 
-   private User user;
+   private User user10;
 
 
 
     @BeforeEach
     void setUp(){
-
-
-        user =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        userRepository.save(user);
-        Client client1 = Client.builder()
+        user10 =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+        user10.setPassword(new BCryptPasswordEncoder().encode(user10.getPassword()));
+        userRepository.save(user10);
+        Client client134 = Client.builder()
                 .name("joseSAul")
                 .lastName("burgos")
                 .email("saulburgos7@gmail.com")
                 .phoneNumber("80945783454")
-                .user(user)
+                .user(user10)
                 .build();
-        clientRepository.save(client1);
+        clientRepository.save(client134);
+
     }
 
     @AfterEach
     void setDown(){
-        clientRepository.deleteAll();
+        user10 = null;
         userRepository.deleteAll();
     }
 
 
     @Test
     void getClient() throws Exception {
-    String token =jwtService.generateToken(user);
+
+    String tokenClient =jwtService.generateToken(user10);
 
 
-        mockMvc.perform(get("/client/1").header("Authorization","Bearer " + token))
+        mockMvc.perform(get("/client/1").header("Authorization","Bearer " + tokenClient))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json("[{\"name\": \"joseSAul\", \"lastName\": \"burgos\",\"email\": \"saulburgos7@gmail.com\", \"phoneNumber\": \"80945783454\"}]"));
@@ -84,11 +84,10 @@ class ClientControllerTest {
 
     @Test
     void createClient() throws Exception {
-        String token =jwtService.generateToken(user);
+        String token09 =jwtService.generateToken(user10);
 
-        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul10@gmail.com\", \"password\": \"12345678\"}";
-        mockMvc.perform(post("/client").header("Authorization","Bearer " + token).content(body).contentType(MediaType.APPLICATION_JSON))
+        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul10@gmail.com\", \"phoneNumber\": \"8299611997\"}";
+        mockMvc.perform(post("/client").header("Authorization","Bearer " + token09).content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-
     }
 }

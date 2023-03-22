@@ -55,7 +55,7 @@ class UserControllerTest {
 
     @Test
     void testCreateUser() throws Exception {
-        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul@gmail.com\", \"password\": \"12345678\"}";
+        String body = "{\"name\": \"saul\", \"lastName\": \"burgos\",\"email\": \"saul35@gmail.com\", \"password\": \"12345678\"}";
 
         mockMvc.perform(post("/user").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())

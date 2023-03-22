@@ -1,6 +1,8 @@
 package com.Prestamos.PrestamosSB.application.find;
 
+import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
+import com.Prestamos.PrestamosSB.domain.Loan;
 import com.Prestamos.PrestamosSB.domain.Transaction;
 import com.Prestamos.PrestamosSB.domain.TransactionRepository;
 import jakarta.transaction.Transactional;
@@ -28,18 +30,25 @@ class FindTransactionTest {
 
     @Test
     void findAllTransaction() {
+        Client client = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos6@gmail.com")
+                .phoneNumber("12345678")
+                .build();
+        Loan prestamo =Loan.builder().amount(100.00).client(client).build();
 
         List<Transaction> transactionList = new ArrayList<>();
         Transaction transaction1 = Transaction.builder()
                 .transactionType(TransactionType.pay)
                 .amount(1000.00)
-                .loanId(1L)
+                .loan(prestamo)
                 .build();
 
         Transaction transaction2 = Transaction.builder()
                 .transactionType(TransactionType.renewal)
                 .amount(10000.00)
-                .loanId(1L)
+                .loan(prestamo)
                 .build();
 
         transactionList.add(transaction1);
