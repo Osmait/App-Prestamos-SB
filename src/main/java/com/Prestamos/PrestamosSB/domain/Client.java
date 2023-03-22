@@ -31,9 +31,20 @@ public class Client {
     @Column(length = 20)
     private  String phoneNumber;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Loan> loans;
 
     @ManyToOne
     private User user;
 
-
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

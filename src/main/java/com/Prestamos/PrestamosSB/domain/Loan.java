@@ -27,7 +27,8 @@ public class Loan {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Transaction> transactions;
 
     @ManyToOne
     private Client client;

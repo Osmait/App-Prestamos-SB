@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.application.find;
 
 
+import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
 import com.Prestamos.PrestamosSB.domain.User;
@@ -25,10 +26,13 @@ class FindClientTest {
     @Autowired
     private FindClient findClient;
 
+    @MockBean
+    private AuthService authService;
+
     @Test
     void findAllClient() {
         List<Client> clientList = new ArrayList<>();
-       User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+       User user = User.builder().id(1L).email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
 
         Client client1 = Client.builder()
                 .name("joseSAul")
@@ -49,9 +53,11 @@ class FindClientTest {
         clientList.add(client1);
         clientList.add(client2);
 
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
         Mockito.when(clientRepository.findAllByUserId(1L)).thenReturn(clientList);
 
-        List<Client> result = findClient.findAllClientByUserId(1L);
+
+        List<Client> result = findClient.findAllClientByUserId();
         assertEquals(clientList.size(),result.size());
         assertEquals(clientList.get(0), result.get(0));
         assertEquals(clientList.get(1), result.get(1));

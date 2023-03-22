@@ -74,7 +74,7 @@ class ClientControllerTest {
     String tokenClient =jwtService.generateToken(user10);
 
 
-        mockMvc.perform(get("/client/1").header("Authorization","Bearer " + tokenClient))
+        mockMvc.perform(get("/client").header("Authorization","Bearer " + tokenClient))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 

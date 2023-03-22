@@ -29,8 +29,6 @@ public class Transaction {
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
-//    @Column(name = "loan_id")
-//    private Long loanId;
 
     @ManyToOne()
     private Loan loan;

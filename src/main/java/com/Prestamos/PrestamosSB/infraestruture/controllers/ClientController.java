@@ -26,10 +26,10 @@ public class ClientController {
     private final FindClient findClient;
 
 
-    @GetMapping("/client/{id}")
-    public ResponseEntity<List<Client>>getClient(@PathVariable Long id){
+    @GetMapping("/client")
+    public ResponseEntity<List<Client>>getClient(){
 
-        List<Client> clientList = findClient.findAllClientByUserId(id);
+        List<Client> clientList = findClient.findAllClientByUserId();
         System.out.println(clientList);
         return new ResponseEntity<>(clientList, HttpStatus.OK);
 

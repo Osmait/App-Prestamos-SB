@@ -21,7 +21,7 @@ public class ClientCreator {
     public  void  create(Client client){
 
        User currentUserId =  authService.getIdCurrentLoggedUser();
-        System.out.println(currentUserId);
+
        client.setUser(currentUserId);
 
        try{
