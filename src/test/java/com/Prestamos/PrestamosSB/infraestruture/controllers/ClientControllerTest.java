@@ -50,14 +50,7 @@ class ClientControllerTest {
         user10 =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         user10.setPassword(new BCryptPasswordEncoder().encode(user10.getPassword()));
         userRepository.save(user10);
-        Client client134 = Client.builder()
-                .name("joseSAul")
-                .lastName("burgos")
-                .email("saulburgos7@gmail.com")
-                .phoneNumber("80945783454")
-                .user(user10)
-                .build();
-        clientRepository.save(client134);
+
 
     }
 
@@ -70,6 +63,14 @@ class ClientControllerTest {
 
     @Test
     void getClient() throws Exception {
+        Client client134 = Client.builder()
+                .name("joseSAul")
+                .lastName("burgos")
+                .email("saulburgos7@gmail.com")
+                .phoneNumber("80945783454")
+                .user(user10)
+                .build();
+        clientRepository.save(client134);
 
     String tokenClient =jwtService.generateToken(user10);
 

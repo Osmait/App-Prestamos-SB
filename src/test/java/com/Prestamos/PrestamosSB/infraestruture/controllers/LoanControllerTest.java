@@ -51,15 +51,6 @@ class LoanControllerTest {
                 .build();
         userLoan.setPassword(new BCryptPasswordEncoder().encode(userLoan.getPassword()));
         userRepository.save(userLoan);
-        Client client434465 = Client.builder()
-                .name("saul")
-                .lastName("burgos")
-                .email("saulburgos6842@gmail.com")
-                .phoneNumber("12345678")
-                .user(userLoan)
-                .build();
-
-        clientRepository.save(client434465);
 
 
     }
@@ -73,6 +64,17 @@ class LoanControllerTest {
 
 //    @Test
 //   public void createLoan() throws Exception {
+//
+//        Client client434465 = Client.builder()
+//                .name("saul")
+//                .lastName("burgos")
+//                .email("saulburgos6842@gmail.com")
+//                .phoneNumber("12345678")
+//                .user(userLoan)
+//                .build();
+//
+//        clientRepository.save(client434465);
+//
 //
 //        String  tokenL =jwtService.generateToken(userLoan);
 //        String body = "{\"amount\":\"1500.00\",\"clientId\":\"1\"}";

@@ -54,20 +54,37 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+
+        try {
+            return extractExpiration(token).before(new Date());
+        }catch (ExpiredJwtException e){
+            throw  new ExpiredJwtException(null,null,e.getMessage());
+        }
+
     }
 
     private Date extractExpiration(String token) {
+
         return extractClaim(token, Claims::getExpiration);
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+
+        try{
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(getSignInKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        }catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }catch (UnsupportedJwtException e) {
+            throw new UnsupportedJwtException(e.getMessage());
+        }catch (MalformedJwtException e) {
+            throw new MalformedJwtException(e.getMessage());
+        }
+
     }
 
     private static Key getSignInKey() {

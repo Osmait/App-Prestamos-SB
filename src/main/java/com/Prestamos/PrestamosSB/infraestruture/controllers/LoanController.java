@@ -37,7 +37,7 @@ public class LoanController {
 
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
-        Client client = findClient.findCLientById(loanRequest.getClientId());
+        Client client = findClient.findClientById(loanRequest.getClientId());
         loanRequest.setClient(client);
        Loan loan  = loanRequest.getLoanFromDto();
         prestamoCreator.create(loan);
