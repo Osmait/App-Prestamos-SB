@@ -1,12 +1,12 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
-import com.Prestamos.PrestamosSB.application.create.PrestamoCreator;
+import com.Prestamos.PrestamosSB.application.create.LoanCreator;
 import com.Prestamos.PrestamosSB.application.find.FindClient;
-import com.Prestamos.PrestamosSB.application.find.FindPrestamos;
+import com.Prestamos.PrestamosSB.application.find.FindLoan;
+import com.Prestamos.PrestamosSB.domain.Balance;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.Loan;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.LoanDto;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LoanController {
 
-    private  final PrestamoCreator prestamoCreator;
+    private  final LoanCreator prestamoCreator;
     private  final FindClient findClient;
 
-    private final FindPrestamos findPrestamos;
+    private final FindLoan findPrestamos;
 
     @GetMapping("/loan/{id}")
     public ResponseEntity<List<Loan>>getAllLoanByClientId(@PathVariable Long id){
-        List<Loan> loanList = findPrestamos.FindAllPrestamos(id);
+        List<Loan> loanList = findPrestamos.FindAllLoan(id);
             return ResponseEntity.ok().body(loanList);
     }
 
-//    @GetMapping("/loan")
-//    public ResponseEntity<List<Loan>>getLoan(){
-//        List<Loan> loanList = findPrestamos.FindLoan();
-//        return ResponseEntity.ok().body(loanList);
-//    }
+    @GetMapping("/loan/balance")
+    public ResponseEntity<List<Balance>>getLoan(){
+        List<Balance> loanList = findPrestamos.FindLoanBalance();
+        return ResponseEntity.ok().body(loanList);
+    }
 
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){

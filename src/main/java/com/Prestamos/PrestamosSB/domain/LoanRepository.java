@@ -1,21 +1,26 @@
 package com.Prestamos.PrestamosSB.domain;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+
 import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PrestamoRepository extends JpaRepository<Loan,Long> {
+public interface LoanRepository extends JpaRepository<Loan,Long> {
 
 
     Optional<List<Loan>> findAllByClientId(Long ClientId);
 
-//    @Query(value = "SELECT loan.id, loan.amount + SUM(transaction.amount) as amount FROM loan JOIN Transaction  ON loan.id = transaction.loan_id",nativeQuery = true)
-//    Optional<List<Loan>>findLoan();
+
+    @Query(value = "SELECT loan.id, loan.amount - SUM(t.amount) as balance, loan.create_at "
+            + "FROM loan JOIN transaction t ON loan.id = t.loan_id "
+            + "GROUP BY loan.id", nativeQuery = true)
+   List<Object[]>findLoanBalance();
 
 
 }

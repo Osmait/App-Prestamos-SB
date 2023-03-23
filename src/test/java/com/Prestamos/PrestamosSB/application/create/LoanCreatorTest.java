@@ -3,7 +3,7 @@ package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.PrestamoRepository;
+import com.Prestamos.PrestamosSB.domain.LoanRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,20 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
-class PrestamoCreatorTest {
+class LoanCreatorTest {
 
 
     @MockBean
-    private PrestamoRepository prestamoRepository;
+    private LoanRepository prestamoRepository;
 
     @Autowired
-    private PrestamoCreator prestamoCreator;
+    private LoanCreator prestamoCreator;
 
 
     @Test

@@ -1,7 +1,7 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.TransactionCreator;
-import com.Prestamos.PrestamosSB.application.find.FindPrestamos;
+import com.Prestamos.PrestamosSB.application.find.FindLoan;
 import com.Prestamos.PrestamosSB.application.find.FindTransaction;
 import com.Prestamos.PrestamosSB.domain.Loan;
 import com.Prestamos.PrestamosSB.domain.Transaction;
@@ -22,7 +22,7 @@ public class TransactionController {
 
     private final TransactionCreator transactionCreator;
 
-    private final FindPrestamos findPrestamos;
+    private final FindLoan findPrestamos;
 
 
 

@@ -31,7 +31,7 @@ class TransactionControllerTest {
     private ClientRepository clientRepository;
 
     @Autowired
-    private PrestamoRepository prestamoRepository;
+    private LoanRepository prestamoRepository;
 
     @Autowired
     private JwtService jwtService;

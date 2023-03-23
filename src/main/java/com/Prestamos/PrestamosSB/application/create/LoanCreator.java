@@ -2,17 +2,17 @@ package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.domain.Loan;
 
-import com.Prestamos.PrestamosSB.domain.PrestamoRepository;
+import com.Prestamos.PrestamosSB.domain.LoanRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PrestamoCreator {
+public class LoanCreator {
 
 
-    private final PrestamoRepository prestamoRepository;
+    private final LoanRepository prestamoRepository;
 
     public void create(Loan loan){
 
