@@ -20,6 +20,9 @@ public class FindTransaction {
         return transactionRepository.findAllByLoanId(id).orElse(new ArrayList<>());
     }
 
+    public void findAndDeleteById(Long id){
+        transactionRepository.deleteById(id);
+    }
 
 
 }

@@ -64,4 +64,19 @@ class FindClientTest {
 
 
     }
+
+    @Test
+    void findAndDeleteById() {
+//        Client client = Client.builder()
+//                .name("saul")
+//                .lastName("burgos")
+//                .email("saulburgos6@gmail.com")
+//                .phoneNumber("12345678")
+//                .build();
+
+        clientRepository.deleteById(1L);
+
+        Mockito.verify(clientRepository,Mockito.times(1)).deleteById(1L);
+
+    }
 }

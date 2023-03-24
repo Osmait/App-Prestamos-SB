@@ -79,4 +79,20 @@ class FindLoanTest {
     void findLoanById() {
 
     }
+
+    @Test
+    void findAndDeleteById() {
+
+//        Client client = Client.builder()
+//                .name("saul")
+//                .lastName("burgos")
+//                .email("saulburgos6@gmail.com")
+//                .phoneNumber("12345678")
+//                .build();
+//        Loan loan =Loan.builder().amount(100.00).client(client).build();
+        prestamoRepository.deleteById(1L);
+
+        Mockito.verify(prestamoRepository,Mockito.times(1)).deleteById(1L);
+
+    }
 }

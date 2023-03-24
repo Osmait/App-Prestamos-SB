@@ -3,11 +3,9 @@ package com.Prestamos.PrestamosSB.application.find;
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +26,8 @@ public class FindClient {
 
         return clientRepository.findById(id).orElseThrow();
     }
+
+
     public  List<Client>findAllClientByUserId(){
 
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
@@ -36,16 +36,19 @@ public class FindClient {
         }
         List<Client> list = new ArrayList<>();
 
-    try{
-        clientRepository.findAllByUserId(currentUserId).iterator().forEachRemaining(list::add);
-    }catch (Exception e){
-        throw new ArrayStoreException("Error find client");
+        try{
+            clientRepository.findAllByUserId(currentUserId).iterator().forEachRemaining(list::add);
+
+        }catch (Exception e){
+
+            throw new ArrayStoreException("Error find client");
+        }
+
+        return list;
     }
 
 
-    return list;
-
-
-
+    public void findAndDeleteById(Long id){
+        clientRepository.deleteById(id);
     }
 }

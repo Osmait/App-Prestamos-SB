@@ -30,7 +30,7 @@ public class Transaction {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @ManyToOne()
+    @ManyToOne
     private Loan loan;
 
 

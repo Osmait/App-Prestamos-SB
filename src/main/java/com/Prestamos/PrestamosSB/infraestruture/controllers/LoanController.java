@@ -44,4 +44,12 @@ public class LoanController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/loan/{id}")
+    public  ResponseEntity<HttpStatus>deleteLoan(@PathVariable Long id){
+
+        findPrestamos.findAndDeleteById(id);
+
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

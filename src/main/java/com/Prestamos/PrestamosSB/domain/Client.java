@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.util.List;
 
 @Builder
@@ -32,7 +33,7 @@ public class Client {
     private  String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Loan> loans;
+    List<Loan> loans ;
 
     @ManyToOne
     private User user;

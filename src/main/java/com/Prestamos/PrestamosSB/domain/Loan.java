@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Loan {
+public class Loan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
@@ -27,7 +28,7 @@ public class Loan {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     List<Transaction> transactions;
 
     @ManyToOne

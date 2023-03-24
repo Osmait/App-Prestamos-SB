@@ -63,4 +63,24 @@ class FindTransactionTest {
 
 
     }
+
+    @Test
+    void findAndDeleteById() {
+//        Client client = Client.builder()
+//                .name("saul")
+//                .lastName("burgos")
+//                .email("saulburgos6@gmail.com")
+//                .phoneNumber("12345678")
+//                .build();
+//        Loan loan =Loan.builder().amount(100.00).client(client).build();
+//        Transaction transaction1 = Transaction.builder()
+//                .transactionType(TransactionType.pay)
+//                .amount(1000.00)
+//                .loan(loan)
+//                .build();
+        transactionRepository.deleteById(1L);
+
+        Mockito.verify(transactionRepository,Mockito.times(1)).deleteById(1L);
+
+    }
 }

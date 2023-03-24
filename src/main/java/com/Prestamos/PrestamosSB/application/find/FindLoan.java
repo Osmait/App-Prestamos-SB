@@ -40,5 +40,8 @@ public class FindLoan {
     public Loan findLoanById(Long id){
       return  loanRepository.findById(id).orElseThrow();
     }
+    public void findAndDeleteById(Long id){
+        loanRepository.deleteById(id);
+    }
 
 }

@@ -8,7 +8,6 @@ import lombok.Data;
 
 
 
-
 @Data
 public class ClientDto {
 
@@ -37,4 +36,6 @@ public class ClientDto {
         return client;
     }
 
+    public ClientDto() {
+    }
 }
