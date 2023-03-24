@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FindLoan {
 
-
     private final LoanRepository loanRepository;
 
     public List<Loan> FindAllLoan(Long id){
@@ -24,8 +23,10 @@ public class FindLoan {
         prestamoList =  loanRepository.findAllByClientId(id).orElse(new ArrayList<>());
         return  prestamoList;
     }
-    public List<Balance> FindLoanBalance() {
-        List<Object[]> balances = loanRepository.findLoanBalance();
+    public List<Balance> FindLoanBalance(Long id) {
+        System.out.println(id);
+        List<Object[]> balances = loanRepository.findLoanBalance(id);
+        System.out.println(balances);
         return balances.stream().map(row -> {
             Balance balance = new Balance();
             balance.setId((Long) row[0]);

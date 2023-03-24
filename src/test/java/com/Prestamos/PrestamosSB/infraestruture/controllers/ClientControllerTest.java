@@ -17,13 +17,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.List;
+
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -49,6 +49,7 @@ class ClientControllerTest {
     void setUp(){
         user10 =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         user10.setPassword(new BCryptPasswordEncoder().encode(user10.getPassword()));
+        System.out.println(user10.getPassword());
         userRepository.save(user10);
 
 

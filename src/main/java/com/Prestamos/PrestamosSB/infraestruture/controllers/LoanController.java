@@ -29,9 +29,9 @@ public class LoanController {
             return ResponseEntity.ok().body(loanList);
     }
 
-    @GetMapping("/loan/balance")
-    public ResponseEntity<List<Balance>>getLoan(){
-        List<Balance> loanList = findPrestamos.FindLoanBalance();
+    @GetMapping("/loan/balance/{id}")
+    public ResponseEntity<List<Balance>>getLoan(@PathVariable Long id){
+        List<Balance> loanList = findPrestamos.FindLoanBalance(id);
         return ResponseEntity.ok().body(loanList);
     }
 

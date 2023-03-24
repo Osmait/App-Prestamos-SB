@@ -66,8 +66,8 @@ class FindLoanTest {
 
 
 
-        Mockito.when(prestamoRepository.findLoanBalance()).thenReturn(rows);
-        List<Balance> result = findPrestamos.FindLoanBalance();
+        Mockito.when(prestamoRepository.findLoanBalance(1L)).thenReturn(rows);
+        List<Balance> result = findPrestamos.FindLoanBalance(1L);
 
         assertEquals(2, result.size());
         assertEquals(1L, result.get(0).getId().longValue());
