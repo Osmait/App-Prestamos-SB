@@ -12,15 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -44,9 +44,23 @@ public class UserController {
            return ValidateBody.ValidFilds(result);
         }
 
+        User validate = findUser.findByEmail(user.getEmail());
+
+        if (Objects.equals(validate.getEmail(), user.getEmail())){
+            Map<String,String> errors = new HashMap<>();
+            errors.put("Error","Email exits");
+            return ResponseEntity.badRequest().body(errors);
+        }
+
         User newUser =  user.getUserFromDto();
         userCreator.create(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
 
+    }
+
+
+    @GetMapping("/user/profile")
+    public ResponseEntity<User> getUserById(){
+        return new ResponseEntity<>(findUser.findProfile(),HttpStatus.OK);
     }
 }

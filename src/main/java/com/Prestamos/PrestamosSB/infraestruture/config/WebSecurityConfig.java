@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,17 +26,19 @@ public class WebSecurityConfig  {
 
     private final JwtRequestFilter JwtRequestFilter;
 
+
+
     private final AuthenticationProvider authenticationProvider;
 
 
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http.cors(AbstractHttpConfigurer::disable).csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user").permitAll()
+                .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/health-check").permitAll()
-                .requestMatchers("/login/**").permitAll()
+                .requestMatchers("/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
