@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000/*", maxAge = 3600)
+
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class TransactionController {
 
     private  final FindTransaction findTransaction;

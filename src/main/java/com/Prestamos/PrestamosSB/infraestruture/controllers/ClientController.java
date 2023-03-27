@@ -20,6 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class ClientController {
 
     private final ClientCreator clientCreator;
