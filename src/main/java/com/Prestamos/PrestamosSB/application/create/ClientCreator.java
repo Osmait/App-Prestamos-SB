@@ -18,16 +18,20 @@ public class ClientCreator {
 
     private final AuthService authService;
 
-    public  void  create(Client client){
+    public  void  create(Client client) throws Exception{
 
        User currentUserId =  authService.getIdCurrentLoggedUser();
 
        client.setUser(currentUserId);
 
+        System.out.println(client);
+
        try{
            clientRepository.save(client);
        }catch (Exception e ){
            System.out.println("Error Insert Client In dataBase");
+           throw  new Exception();
+
        }
 
     }

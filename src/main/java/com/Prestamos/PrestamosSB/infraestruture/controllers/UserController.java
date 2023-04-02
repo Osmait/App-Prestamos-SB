@@ -23,6 +23,7 @@ import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
 

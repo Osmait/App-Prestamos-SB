@@ -6,25 +6,30 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.io.Serializable;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-@Table(name = "loan")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Loan implements Serializable {
+@Entity
+@Table(name = "loan")
+public class Loan  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 
     private Double amount;
 
-    @Column(name = "create_at")
+
+    @Column(name = "payment_date",nullable = false)
+    private LocalDateTime PaymentDate;
+
+    @Column(name = "create_at" )
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
@@ -33,9 +38,8 @@ public class Loan implements Serializable {
 
     @ManyToOne
     private Client client;
-
-
-
+    @ManyToOne
+    private User user;
 
 
 }

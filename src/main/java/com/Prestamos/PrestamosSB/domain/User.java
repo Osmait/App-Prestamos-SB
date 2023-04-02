@@ -41,6 +41,8 @@ public class User  implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL)
     List<Client> clients;
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Loan> loans;
 
     @Override
     public String toString() {

@@ -26,8 +26,5 @@ public class UserCreator {
             System.out.println("Error Insert User");
         }
 
-
-
-
     }
 }

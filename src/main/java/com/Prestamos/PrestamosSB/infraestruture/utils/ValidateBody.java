@@ -10,6 +10,7 @@ import java.util.Map;
 public class ValidateBody {
 
     public static ResponseEntity<Map<String, String>> ValidFilds(BindingResult result){
+
         Map<String,String> errors = new HashMap<>();
         for (FieldError error: result.getFieldErrors()){
             errors.put(error.getField(),error.getDefaultMessage());

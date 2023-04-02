@@ -1,26 +1,60 @@
 package com.Prestamos.PrestamosSB.application.find;
 
+import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Balance;
 import com.Prestamos.PrestamosSB.domain.Loan;
 
 import com.Prestamos.PrestamosSB.domain.LoanRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
 public class FindLoan {
 
     private final LoanRepository loanRepository;
+    private final AuthService authService;
+
+    public List<Loan>findLoanByDate( Long id){
+        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        if (currentUserId == null){
+            throw new UsernameNotFoundException("User Not Auth");
+        }
+
+        List<Loan> prestamoList;
+
+        prestamoList =  loanRepository.findAllByClientIdAndUserId(id,currentUserId)
+                .orElse(new ArrayList<>());
+        System.out.println(prestamoList);
+        if (prestamoList.size() <= 0){
+
+            return new ArrayList<>();
+        }
+        return  prestamoList.stream()
+                .filter(loan ->  loan.getPaymentDate().
+                        isBefore(LocalDateTime.now().plusDays(1)) && loan.getPaymentDate()
+                        .isAfter(LocalDateTime.now().minusDays(1))).toList();
+
+
+    }
 
     public List<Loan> FindAllLoan(Long id){
+        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        if (currentUserId == null){
+            throw new UsernameNotFoundException("User Not Auth");
+        }
+
         List<Loan> prestamoList;
-        prestamoList =  loanRepository.findAllByClientId(id).orElse(new ArrayList<>());
+        prestamoList =  loanRepository.findAllByClientId(id).orElseThrow();
         return  prestamoList;
     }
     public List<Balance> FindLoanBalance(Long id) {
@@ -43,5 +77,7 @@ public class FindLoan {
     public void findAndDeleteById(Long id){
         loanRepository.deleteById(id);
     }
+
+
 
 }

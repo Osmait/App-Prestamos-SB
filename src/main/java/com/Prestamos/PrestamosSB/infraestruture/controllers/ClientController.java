@@ -37,7 +37,7 @@ public class ClientController {
     }
 
     @PostMapping("/client")
-    public ResponseEntity<Map<String, String>> createClient(@Validated @RequestBody ClientDto clientRequest, BindingResult result){
+    public ResponseEntity<Map<String, String>> createClient(@Validated @RequestBody ClientDto clientRequest, BindingResult result) throws Exception {
         if (result.hasErrors()){
 
          return ValidateBody.ValidFilds(result);

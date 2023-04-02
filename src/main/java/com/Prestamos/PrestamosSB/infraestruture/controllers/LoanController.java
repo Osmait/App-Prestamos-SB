@@ -26,9 +26,18 @@ public class LoanController {
 
     @GetMapping("/loan/{id}")
     public ResponseEntity<List<Loan>>getAllLoanByClientId(@PathVariable Long id){
+
         List<Loan> loanList = findPrestamos.FindAllLoan(id);
             return ResponseEntity.ok().body(loanList);
     }
+
+    @GetMapping("/loan/payment/{id}")
+    public List<Loan>getLoanPayment(@PathVariable Long id){
+        return   findPrestamos.findLoanByDate(id);
+
+
+    }
+
 
     @GetMapping("/loan/balance/{id}")
     public ResponseEntity<List<Balance>>getLoan(@PathVariable Long id){
@@ -38,9 +47,12 @@ public class LoanController {
 
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
+        System.out.println(loanRequest);
         Client client = findClient.findClientById(loanRequest.getClientId());
         loanRequest.setClient(client);
        Loan loan  = loanRequest.getLoanFromDto();
+        System.out.println(loan);
+
         prestamoCreator.create(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
