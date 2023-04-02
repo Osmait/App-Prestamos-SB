@@ -4,7 +4,7 @@ import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class FindUser {
     public List<User>findAllUser(){
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
-        System.out.println(list);
+
         return list;
     }
 

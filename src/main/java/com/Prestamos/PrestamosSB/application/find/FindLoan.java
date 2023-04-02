@@ -34,15 +34,13 @@ public class FindLoan {
 
         prestamoList =  loanRepository.findAllByClientIdAndUserId(id,currentUserId)
                 .orElse(new ArrayList<>());
-        System.out.println(prestamoList);
+
         if (prestamoList.size() <= 0){
 
             return new ArrayList<>();
         }
-        return  prestamoList.stream()
-                .filter(loan ->  loan.getPaymentDate().
-                        isBefore(LocalDateTime.now().plusDays(1)) && loan.getPaymentDate()
-                        .isAfter(LocalDateTime.now().minusDays(1))).toList();
+
+        return prestamoList.stream().filter( loan -> loan.getPaymentDate().getDayOfMonth() == LocalDateTime.now().getDayOfMonth()).toList();
 
 
     }
