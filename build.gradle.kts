@@ -51,7 +51,7 @@ tasks.withType<Test> {
 }
 tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "com.Prestamos.PrestamosSbApplication"
+		attributes["Main-Class"] = "com.Prestamos.PrestamosSB.PrestamosSbApplication"
 	}
 }
 
