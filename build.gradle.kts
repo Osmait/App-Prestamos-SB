@@ -52,4 +52,8 @@ tasks.withType<Test> {
 tasks.bootJar {
 	archiveFileName.set("com.Prestamos.PrestamosSB.PrestamosSbApplication.jar")
 }
-
+tasks.jar {
+	manifest {
+		attributes["Main-Class"] = "com.prestamos.PrestamosSB.PrestamosSbApplication"
+	}
+}
