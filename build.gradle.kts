@@ -54,8 +54,11 @@ tasks.withType<Test> {
 tasks.bootJar {
 	archiveFileName.set("com.Prestamos.PrestamosSB.PrestamosSbApplication.jar")
 }
-tasks.named<Jar>("bootJar") {
+tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "com.prestamos.PrestamosSB.PrestamosSbApplication"
+		attributes(
+				"Implementation-Title" to "Gradle",
+				"Implementation-Version" to archiveVersion
+		)
 	}
 }
