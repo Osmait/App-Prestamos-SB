@@ -52,8 +52,4 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.jar {
-	manifest {
-		attributes["Main-Class"] = "com.Prestamos.PrestamosSB.PrestamosSbApplication"
-	}
-}
+tasks.jar {enabled = false}
