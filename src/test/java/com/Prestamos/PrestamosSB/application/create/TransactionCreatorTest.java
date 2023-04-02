@@ -1,10 +1,8 @@
 package com.Prestamos.PrestamosSB.application.create;
 
-import com.Prestamos.PrestamosSB.domain.Client;
+import com.Prestamos.PrestamosSB.application.auth.AuthService;
+import com.Prestamos.PrestamosSB.domain.*;
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.Transaction;
-import com.Prestamos.PrestamosSB.domain.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,10 +21,12 @@ class TransactionCreatorTest {
 
     @Autowired
     private TransactionCreator transactionCreator;
-
-
+    @MockBean
+    private AuthService authService;
     @Test
     void create() {
+        User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
         Client client = Client.builder()
                 .name("saul")
                 .lastName("burgos")
@@ -39,7 +39,7 @@ class TransactionCreatorTest {
                 .amount(1000.00)
                 .loan(prestamo)
                 .build();
-
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
         transactionCreator.create(transaction1);
 
         Mockito.verify(transactionRepository,Mockito.times(1)).save(transaction1);

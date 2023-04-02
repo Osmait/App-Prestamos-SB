@@ -12,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -78,7 +82,7 @@ class TransactionControllerTest {
                 .user(userT)
                 .build();
         clientRepository.save(client4563);
-        Loan prestamo =Loan.builder().amount(100.00).client(client4563).build();
+        Loan prestamo =Loan.builder().amount(100.00).client(client4563).PaymentDate(LocalDateTime.parse("2023-04-08T04:00:00.000Z", DateTimeFormatter.ISO_DATE_TIME)).build();
 
         prestamoRepository.save(prestamo);
 

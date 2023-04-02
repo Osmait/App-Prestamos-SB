@@ -24,7 +24,7 @@ public class ClientCreator {
 
        client.setUser(currentUserId);
 
-        System.out.println(client);
+
 
        try{
            clientRepository.save(client);
