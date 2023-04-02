@@ -1,1 +1,0 @@
-web: java -jar build/libs/com.Prestamos-0.0.1-SNAPSHOT.jar
