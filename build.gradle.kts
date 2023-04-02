@@ -51,14 +51,8 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-tasks.bootJar {
-	archiveFileName.set("com.Prestamos.PrestamosSB.PrestamosSbApplication.jar")
-}
 tasks.jar {
 	manifest {
-		attributes(
-				"Implementation-Title" to "Gradle",
-				"Implementation-Version" to archiveVersion
-		)
+		attributes["Main-Class"] = "com.Prestamos.PrestamosSbApplication"
 	}
 }
