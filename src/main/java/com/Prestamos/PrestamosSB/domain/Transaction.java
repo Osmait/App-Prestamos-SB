@@ -33,6 +33,9 @@ public class Transaction {
     @ManyToOne
     private Loan loan;
 
+    @ManyToOne
+    private User user;
+
 
 
 

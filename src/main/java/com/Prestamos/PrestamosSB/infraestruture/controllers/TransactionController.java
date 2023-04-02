@@ -41,6 +41,11 @@ public class TransactionController {
     public ResponseEntity<List<Transaction>>getTransactionByLoanId(@PathVariable Long id){
         return ResponseEntity.ok().body(findTransaction.findAllTransaction(id));
     }
+
+    @GetMapping("/transaction/user")
+    public ResponseEntity<List<Transaction>>getTransactionByUserId(){
+        return ResponseEntity.ok().body(findTransaction.findAllTransactionbyUser());
+    }
     @DeleteMapping("/transaction/{id}")
     public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id){
         findTransaction.findAndDeleteById(id);

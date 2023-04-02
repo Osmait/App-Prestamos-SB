@@ -43,6 +43,8 @@ public class User  implements UserDetails {
     List<Client> clients;
     @OneToMany(cascade = CascadeType.ALL)
     List<Loan> loans;
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Transaction> transactions;
 
     @Override
     public String toString() {
