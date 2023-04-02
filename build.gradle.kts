@@ -46,13 +46,15 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 }
 
+
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
 tasks.bootJar {
 	archiveFileName.set("com.Prestamos.PrestamosSB.PrestamosSbApplication.jar")
 }
-tasks.jar {
+tasks.named<Jar>("bootJar") {
 	manifest {
 		attributes["Main-Class"] = "com.prestamos.PrestamosSB.PrestamosSbApplication"
 	}
