@@ -31,9 +31,9 @@ public class LoanController {
             return ResponseEntity.ok().body(loanList);
     }
 
-    @GetMapping("/loan/payment/{id}")
-    public List<Loan>getLoanPayment(@PathVariable Long id){
-        return   findPrestamos.findLoanByDate(id);
+    @GetMapping("/loan/payment")
+    public List<Loan>getLoanPayment(){
+        return   findPrestamos.findLoanByDate();
 
 
     }

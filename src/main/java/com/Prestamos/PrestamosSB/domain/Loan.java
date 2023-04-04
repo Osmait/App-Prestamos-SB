@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 
 
 import java.time.LocalDateTime;
@@ -28,6 +28,12 @@ public class Loan  {
 
     @Column(name = "payment_date",nullable = false)
     private LocalDateTime PaymentDate;
+
+    @Column(nullable = false)
+    private Double interest;
+
+    @Column(name ="amount_of_payments",nullable = false)
+    private Integer amountOfPayments;
 
     @Column(name = "create_at" )
     @CreationTimestamp

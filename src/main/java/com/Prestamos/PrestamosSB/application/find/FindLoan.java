@@ -24,7 +24,7 @@ public class FindLoan {
     private final LoanRepository loanRepository;
     private final AuthService authService;
 
-    public List<Loan>findLoanByDate( Long id){
+    public List<Loan>findLoanByDate( ){
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
@@ -32,7 +32,7 @@ public class FindLoan {
 
         List<Loan> prestamoList;
 
-        prestamoList =  loanRepository.findAllByClientIdAndUserId(id,currentUserId)
+        prestamoList =  loanRepository.findAllByUserId(currentUserId)
                 .orElse(new ArrayList<>());
 
         if (prestamoList.size() <= 0){

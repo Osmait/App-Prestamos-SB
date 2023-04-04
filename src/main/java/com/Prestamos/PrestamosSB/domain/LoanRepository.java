@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +19,7 @@ public interface LoanRepository extends JpaRepository<Loan,Long> {
 
     Optional<List<Loan>> findAllByClientId(Long ClientId);
 
-    Optional<List<Loan>> findAllByClientIdAndUserId(Long ClientId, Long UserId);
+    Optional<List<Loan>> findAllByUserId(Long UserId);
 
 
     @Query(value = "SELECT loan.id, loan.amount - SUM(t.amount) as balance, loan.create_at "
