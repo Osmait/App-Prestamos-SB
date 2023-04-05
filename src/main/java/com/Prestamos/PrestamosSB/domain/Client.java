@@ -32,6 +32,8 @@ public class Client {
     @Column(length = 20)
     private  String phoneNumber;
 
+    private String img;
+
     @OneToMany(cascade = CascadeType.ALL)
     List<Loan> loans ;
 

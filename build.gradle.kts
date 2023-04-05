@@ -31,6 +31,10 @@ dependencies {
 	testAnnotationProcessor ("org.projectlombok:lombok:1.18.26")
 
 
+	implementation("com.cloudinary:cloudinary-http44:1.31.0")
+
+
+
 
 
 

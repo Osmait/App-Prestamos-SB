@@ -18,6 +18,11 @@ public class ClientCreator {
 
     private final AuthService authService;
 
+
+
+
+
+
     public  void  create(Client client) throws Exception{
 
        User currentUserId =  authService.getIdCurrentLoggedUser();

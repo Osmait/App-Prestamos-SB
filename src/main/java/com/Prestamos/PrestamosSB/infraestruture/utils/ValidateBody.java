@@ -13,6 +13,7 @@ public class ValidateBody {
 
         Map<String,String> errors = new HashMap<>();
         for (FieldError error: result.getFieldErrors()){
+
             errors.put(error.getField(),error.getDefaultMessage());
 
         }
