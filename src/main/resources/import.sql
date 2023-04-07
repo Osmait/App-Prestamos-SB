@@ -1,5 +1,5 @@
 --
-insert into users (id, name, last_name, email, password) values (1, 'saul', 'burgos', 'saulburgos6@gmail.com', '$2a$10$e9v8.WXi1z8KuMgBjWv20OBpfhAcbPcOKuabwNjF2zOvDkFpOTRx2');
+-- insert into users (id, name, last_name, email, password) values (1, 'saul', 'burgos', 'saulburgos6@gmail.com', '$2a$10$e9v8.WXi1z8KuMgBjWv20OBpfhAcbPcOKuabwNjF2zOvDkFpOTRx2');
 -- insert into users (id, name, last_name, email, password) values (2, 'Ignaz', 'Lynskey', 'ilynskey0@ca.gov', '5RquYc');
 -- insert into users (id, name, last_name, email, password) values (3, 'Briggs', 'Fareweather', 'bfareweather2@scribd.com', '8HL4NMB');
 -- -- $2a$10$e9v8.WXi1z8KuMgBjWv20OBpfhAcbPcOKuabwNjF2zOvDkFpOTRx2
