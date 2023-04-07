@@ -4,7 +4,7 @@
 -- insert into users (id, name, last_name, email, password) values (3, 'Briggs', 'Fareweather', 'bfareweather2@scribd.com', '8HL4NMB');
 -- -- $2a$10$e9v8.WXi1z8KuMgBjWv20OBpfhAcbPcOKuabwNjF2zOvDkFpOTRx2
 -- Clients
-
+-- ss
 -- insert into clients (id, name, last_name, email, phone_number, user_id) values (1, 'Berky', 'Cusick', 'bcusick0@biglobe.ne.jp', '330-495-6272', 1);
 -- insert into clients (id, name, last_name, email, phone_number, user_id) values (2, 'Steffane', 'Faire', 'sfaire1@goo.ne.jp', '330-495-6272', 1);
 -- insert into clients (id, name, last_name, email, phone_number, user_id) values (3, 'Vic', 'Checcuzzi', 'vcheccuzzi2@plala.or.jp', '330-495-6272', 1);
