@@ -30,6 +30,12 @@ public class LoanController {
         List<Loan> loanList = findPrestamos.FindAllLoan(id);
             return ResponseEntity.ok().body(loanList);
     }
+    @GetMapping("/loan")
+    public ResponseEntity<List<Loan>>getAllLoanByUser(){
+
+        List<Loan> loanList = findPrestamos.FindAllLoanByUser();
+        return ResponseEntity.ok().body(loanList);
+    }
 
     @GetMapping("/loan/payment")
     public List<Loan>getLoanPayment(){

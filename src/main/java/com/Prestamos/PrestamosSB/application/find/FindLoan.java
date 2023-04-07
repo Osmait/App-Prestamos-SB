@@ -55,6 +55,17 @@ public class FindLoan {
         prestamoList =  loanRepository.findAllByClientId(id).orElseThrow();
         return  prestamoList;
     }
+
+    public List<Loan> FindAllLoanByUser(){
+        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        if (currentUserId == null){
+            throw new UsernameNotFoundException("User Not Auth");
+        }
+
+        List<Loan> prestamoList;
+        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow();
+        return  prestamoList;
+    }
     public List<Balance> FindLoanBalance(Long id) {
         System.out.println(id);
         List<Object[]> balances = loanRepository.findLoanBalance(id);
