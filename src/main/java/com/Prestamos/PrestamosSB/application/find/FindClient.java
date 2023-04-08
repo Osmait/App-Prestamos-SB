@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -28,25 +28,23 @@ public class FindClient {
     }
 
 
-    public  List<Client>findAllClientByUserId(){
+    public  List<Client>findAllClientByUserId() throws Exception {
 
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }
-        List<Client> list = new ArrayList<>();
 
         try{
-            clientRepository.findAllByUserId(currentUserId).iterator().forEachRemaining(list::add);
+
+           return  clientRepository.findAllByUserId(currentUserId).orElseThrow();
 
         }catch (Exception e){
 
-            throw new ArrayStoreException("Error find client");
+            throw new Exception(e);
         }
 
-        return list;
     }
-
 
     public void findAndDeleteById(Long id){
         clientRepository.deleteById(id);

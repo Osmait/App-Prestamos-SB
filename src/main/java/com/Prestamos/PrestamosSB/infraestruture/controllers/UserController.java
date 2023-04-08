@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody UserDto user, BindingResult result){
+    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody UserDto user, BindingResult result) throws Exception {
         if(result.hasErrors()) {
            return ValidateBody.ValidFilds(result);
         }

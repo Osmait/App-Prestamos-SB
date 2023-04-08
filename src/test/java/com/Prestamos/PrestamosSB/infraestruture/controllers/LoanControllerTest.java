@@ -4,22 +4,27 @@ import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
+
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -44,7 +49,8 @@ class LoanControllerTest {
     @BeforeEach
     void setUp(){
         userLoan =User.builder()
-                .email("saulburgos698@gmail.com")
+
+                .email("saulburgos8@gmail.com")
                 .name("saul")
                 .lastName("burgos")
                 .password("12345678")
@@ -62,28 +68,38 @@ class LoanControllerTest {
         clientRepository.deleteAll();
     }
 
-//    @Test
-//   public void createLoan() throws Exception {
-//
-//        Client client434465 = Client.builder()
-//                .name("saul")
-//                .lastName("burgos")
-//                .email("saulburgos6842@gmail.com")
-//                .phoneNumber("12345678")
-//                .user(userLoan)
-//                .build();
-//
-//        clientRepository.save(client434465);
-//
-//
-//        String  tokenL =jwtService.generateToken(userLoan);
-//        String body = "{\"amount\":\"1500.00\",\"clientId\":\"1\"}";
-//        mockMvc.perform(post("/loan")
-//                        .header("Authorization","Bearer " + tokenL)
-//                        .content(body)
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-//    }
+    @Test
+   public void createLoan() throws Exception {
+      User userDb =   userRepository.findOneByEmail(userLoan.getEmail()).orElseThrow();
+      Client client434465 = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos42@gmail.com")
+                .phoneNumber("12345678")
+                .user(userDb)
+                .build();
+
+        clientRepository.save(client434465);
+       List<Client>clientDb =  clientRepository.findAllByUserId(userDb.getId()).orElseThrow();
+        System.out.println("Aqui!!!!!!!!!!!!!!!!!111");
+        System.out.println(clientDb.get(0).getId());
+
+
+        String  tokenL =jwtService.generateToken(userLoan);
+        String body = String.format("{\n" +
+                "    \"amount\":\"2000\",\n" +
+                "    \"interest\":20,\n" +
+                "    \"amountOfPayments\":6,\n" +
+                "    \"paymentDate\":\"2023-04-08T07:00:00.000Z\",\n" +
+                "    \"clientId\":%s\n" +
+                "\n" +
+                "}",clientDb.get(0).getId());
+        mockMvc.perform(post("/loan")
+                        .header("Authorization","Bearer " + tokenL)
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+    }
 
     @Test
   public void getAllLoan() throws Exception {

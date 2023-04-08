@@ -37,6 +37,6 @@ public class FindUser {
             throw new UsernameNotFoundException("User Not Auth");
         }
 
-        return userRepository.findById(currentUserId).orElse(new User());
+        return userRepository.findById(currentUserId).orElseThrow();
     }
 }

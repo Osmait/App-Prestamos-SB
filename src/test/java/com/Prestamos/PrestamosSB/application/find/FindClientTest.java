@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ class FindClientTest {
     private AuthService authService;
 
     @Test
-    void findAllClient() {
+    void findAllClient() throws Exception {
         List<Client> clientList = new ArrayList<>();
        User user = User.builder().id(1L).email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
 
@@ -54,7 +55,7 @@ class FindClientTest {
         clientList.add(client2);
 
         Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
-        Mockito.when(clientRepository.findAllByUserId(1L)).thenReturn(clientList);
+        Mockito.when(clientRepository.findAllByUserId(user.getId())).thenReturn(Optional.of(clientList));
 
 
         List<Client> result = findClient.findAllClientByUserId();
@@ -79,4 +80,6 @@ class FindClientTest {
         Mockito.verify(clientRepository,Mockito.times(1)).deleteById(1L);
 
     }
+
+
 }

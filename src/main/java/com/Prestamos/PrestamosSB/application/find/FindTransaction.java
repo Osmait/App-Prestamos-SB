@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -19,7 +19,7 @@ public class FindTransaction {
     private final TransactionRepository transactionRepository;
 
     public List<Transaction> findAllTransaction(Long id){
-        return transactionRepository.findAllByLoanId(id).orElse(new ArrayList<>());
+        return transactionRepository.findAllByLoanId(id).orElseThrow();
     }
 
     public List<Transaction> findAllTransactionbyUser(){
@@ -28,7 +28,7 @@ public class FindTransaction {
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }
-        return transactionRepository.findByUserId(currentUserId).orElse(new ArrayList<>());
+        return transactionRepository.findByUserId(currentUserId).orElseThrow();
     }
 
     public void findAndDeleteById(Long id){

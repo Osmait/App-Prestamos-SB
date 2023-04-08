@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,38 +30,37 @@ class FindLoanTest {
     private AuthService authService;
 
 
-//    @Test
-//    void findLoan() {
-//        User user = User.builder().id(1L).email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
-//
-//        List<Loan> prestamoList= new ArrayList<>();
-//
-//        Client client = Client.builder()
-//                .name("saul")
-//                .lastName("burgos")
-//                .email("saulburgos6@gmail.com")
-//                .phoneNumber("12345678")
-//                .build();
-//
-//        Loan prestamo1 = Loan.builder().amount(10100.00).client(client).build();
-//
-//        Loan prestamo2 =Loan.builder().amount(1000.00).client(client).build();
-//
-//
-//        prestamoList.add(prestamo1);
-//        prestamoList.add(prestamo2);
-//        Mockito.when(authService.getIdCurrentLoggedUser().getId()).thenReturn(1L);
-//        Mockito.when(prestamoRepository.findAllByClientId(1L)).thenReturn(Optional.of(prestamoList));
-//
-//        List<Loan> result= findPrestamos.FindAllLoan(1L);
-//        System.out.println(prestamo1);
-//        assertEquals(prestamoList.size(),result.size());
-//        assertEquals(prestamoList.get(0),result.get(0));
-//        assertEquals(prestamoList.get(1),result.get(1));
-//
-//
-//
-//    }
+    @Test
+    void findLoan() {
+        User user = User.builder().id(1L).email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
+        List<Loan> prestamoList= new ArrayList<>();
+
+        Client client = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos6@gmail.com")
+                .phoneNumber("12345678")
+                .build();
+        Loan loan1 = Loan.builder().amount(10100.00).interest(20.00).amountOfPayments(6).PaymentDate(LocalDateTime.now()).client(client).build();
+
+        Loan loan2 =Loan.builder().amount(1000.00).interest(10.00).client(client).amountOfPayments(4).PaymentDate(LocalDateTime.now()).build();
+
+
+        prestamoList.add(loan1);
+        prestamoList.add(loan2);
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
+        Mockito.when(prestamoRepository.findAllByClientId(user.getId())).thenReturn(Optional.of(prestamoList));
+
+        List<Loan> result= findPrestamos.FindAllLoan(1L);
+
+        assertEquals(prestamoList.size(),result.size());
+        assertEquals(prestamoList.get(0),result.get(0));
+        assertEquals(prestamoList.get(1),result.get(1));
+
+
+
+    }
 
     @Test
     void findLoanBalance() {
@@ -88,16 +88,75 @@ class FindLoanTest {
     @Test
     void findAndDeleteById() {
 
-//        Client client = Client.builder()
-//                .name("saul")
-//                .lastName("burgos")
-//                .email("saulburgos6@gmail.com")
-//                .phoneNumber("12345678")
-//                .build();
-//        Loan loan =Loan.builder().amount(100.00).client(client).build();
         prestamoRepository.deleteById(1L);
 
         Mockito.verify(prestamoRepository,Mockito.times(1)).deleteById(1L);
 
     }
+
+    @Test
+    void findLoanByDate() {
+        User user = User.builder().id(1L).email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
+        List<Loan> prestamoList= new ArrayList<>();
+
+        Client client = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos6@gmail.com")
+                .phoneNumber("12345678")
+                .build();
+
+        Loan loan1 = Loan.builder().amount(10100.00).interest(20.00).amountOfPayments(6).PaymentDate(LocalDateTime.now()).client(client).build();
+
+        Loan loan2 =Loan.builder().amount(1000.00).interest(10.00).client(client).amountOfPayments(4).PaymentDate(LocalDateTime.now()).build();
+
+
+        prestamoList.add(loan1);
+        prestamoList.add(loan2);
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
+        Mockito.when(prestamoRepository.findAllByUserId(user.getId())).thenReturn(Optional.of(prestamoList));
+
+        List<Loan> result= findPrestamos.findLoanByDate();
+
+        assertEquals(prestamoList.size(),result.size());
+        assertEquals(prestamoList.get(0),result.get(0));
+        assertEquals(prestamoList.get(1),result.get(1));
+
+
+    }
+
+    @Test
+    void findAllLoanByUser() {
+
+        User user = User.builder().id(1L).email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
+        List<Loan> prestamoList= new ArrayList<>();
+
+        Client client = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos6@gmail.com")
+                .phoneNumber("12345678")
+                .build();
+
+        Loan loan1 = Loan.builder().amount(10100.00).interest(20.00).amountOfPayments(6).PaymentDate(LocalDateTime.now()).client(client).build();
+
+        Loan loan2 =Loan.builder().amount(1000.00).interest(10.00).client(client).amountOfPayments(4).PaymentDate(LocalDateTime.now()).build();
+
+
+        prestamoList.add(loan1);
+        prestamoList.add(loan2);
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
+        Mockito.when(prestamoRepository.findAllByUserId(user.getId())).thenReturn(Optional.of(prestamoList));
+
+        List<Loan> result= findPrestamos.FindAllLoanByUser();
+
+        assertEquals(prestamoList.size(),result.size());
+        assertEquals(prestamoList.get(0),result.get(0));
+        assertEquals(prestamoList.get(1),result.get(1));
+
+    }
+
+
 }

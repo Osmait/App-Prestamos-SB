@@ -1,5 +1,6 @@
 package com.Prestamos.PrestamosSB.application.find;
 
+import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +26,9 @@ class FindUserTest {
 
     @Autowired
     private FindUser findUser;
+
+    @MockBean
+    private AuthService authService;
 
     @Test
     void findAllUser() {
@@ -41,6 +46,27 @@ class FindUserTest {
         assertEquals(userList.size(),result.size());
         assertEquals(userList.get(0), result.get(0));
         assertEquals(userList.get(1), result.get(1));
+
+    }
+
+    @Test
+    void findProfile() {
+
+
+        User user1 = User.builder().id(1L).email("saulburgos8@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
+
+
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user1);
+
+        Mockito.when(userRepository.findById(user1.getId())).thenReturn(Optional.of(user1));
+
+        User result  = findUser.findProfile();
+
+        assertEquals(user1.getId(),result.getId());
+        assertEquals(user1.getEmail(), result.getEmail());
+
+
 
     }
 }

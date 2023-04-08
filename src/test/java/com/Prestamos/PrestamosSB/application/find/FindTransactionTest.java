@@ -1,10 +1,8 @@
 package com.Prestamos.PrestamosSB.application.find;
 
-import com.Prestamos.PrestamosSB.domain.Client;
+import com.Prestamos.PrestamosSB.application.auth.AuthService;
+import com.Prestamos.PrestamosSB.domain.*;
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.Transaction;
-import com.Prestamos.PrestamosSB.domain.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,9 @@ class FindTransactionTest {
 
     @Autowired
     private FindTransaction findTransaction;
+
+    @MockBean
+    private AuthService authService;
 
 
     @Test
@@ -81,6 +83,49 @@ class FindTransactionTest {
         transactionRepository.deleteById(1L);
 
         Mockito.verify(transactionRepository,Mockito.times(1)).deleteById(1L);
+
+    }
+
+    @Test
+    void findAllTransactionbyUser() {
+        User user = User.builder().id(1L).email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+        Client client = Client.builder()
+                .name("saul")
+                .lastName("burgos")
+                .email("saulburgos8@gmail.com")
+                .phoneNumber("12345678")
+                .build();
+        Loan loan = Loan.builder().amount(10100.00).interest(20.00).amountOfPayments(6).PaymentDate(LocalDateTime.now()).client(client).build();
+
+
+
+        List<Transaction> transactionList = new ArrayList<>();
+        Transaction transaction1 = Transaction.builder()
+                .transactionType(TransactionType.pay)
+                .amount(1000.00)
+                .loan(loan)
+                .user(user)
+                .build();
+
+        Transaction transaction2 = Transaction.builder()
+                .transactionType(TransactionType.renewal)
+                .amount(10000.00)
+                .loan(loan)
+                .user(user)
+                .build();
+
+        transactionList.add(transaction1);
+        transactionList.add(transaction2);
+
+        Mockito.when(transactionRepository.findByUserId(1L)).thenReturn(Optional.of(transactionList));
+        Mockito.when(authService.getIdCurrentLoggedUser()).thenReturn(user);
+
+        List<Transaction> result = findTransaction.findAllTransactionbyUser();
+        assertEquals(transactionList.size(),result.size());
+        assertEquals(transactionList.get(0),result.get(0));
+        assertEquals(transactionList.get(1),result.get(1));
+
+
 
     }
 }

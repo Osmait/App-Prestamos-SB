@@ -38,8 +38,14 @@ public class LoanController {
     }
 
     @GetMapping("/loan/payment")
-    public List<Loan>getLoanPayment(){
-        return   findPrestamos.findLoanByDate();
+    public ResponseEntity<List<Loan>>getLoanPayment(){
+
+       List<Loan>response = findPrestamos.findLoanByDate();
+        System.out.println(response);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
+
+
 
 
     }
@@ -52,7 +58,7 @@ public class LoanController {
     }
 
     @PostMapping("/loan")
-    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest){
+    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest) throws Exception {
         System.out.println(loanRequest);
         Client client = findClient.findClientById(loanRequest.getClientId());
         loanRequest.setClient(client);

@@ -47,7 +47,7 @@ class ClientControllerTest {
 
     @BeforeEach
     void setUp(){
-        user10 =User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+        user10 =User.builder().email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         user10.setPassword(new BCryptPasswordEncoder().encode(user10.getPassword()));
         System.out.println(user10.getPassword());
         userRepository.save(user10);
@@ -78,9 +78,8 @@ class ClientControllerTest {
 
         mockMvc.perform(get("/client").header("Authorization","Bearer " + tokenClient))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
-//.andExpect(content().json("[{\"name\": \"joseSAul\", \"lastName\": \"burgos\",\"email\": \"saulburgos7@gmail.com\", \"phoneNumber\": \"80945783454\"}]"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("[{\"name\": \"joseSAul\", \"lastName\": \"burgos\",\"email\": \"saulburgos7@gmail.com\", \"phoneNumber\": \"80945783454\"}]"));
 
     }
 

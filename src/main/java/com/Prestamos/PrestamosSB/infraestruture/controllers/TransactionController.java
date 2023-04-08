@@ -28,7 +28,7 @@ public class TransactionController {
 
 
     @PostMapping("/transaction")
-    public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request){
+    public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request) throws Exception {
 
         Loan loan = findPrestamos.findLoanById(request.getLoanId());
         request.setLoan(loan);

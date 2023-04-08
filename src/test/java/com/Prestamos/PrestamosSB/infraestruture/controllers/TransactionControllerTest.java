@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -46,7 +47,7 @@ class TransactionControllerTest {
     @BeforeEach
     void setUp(){
         userT = User.builder()
-                .email("saulburgos66@gmail.com")
+                .email("saulburgos7@gmail.com")
                 .name("saul")
                 .lastName("burgos")
                 .password("12345678")
@@ -54,6 +55,19 @@ class TransactionControllerTest {
 
         userT.setPassword(new BCryptPasswordEncoder().encode(userT.getPassword()));
         userRepository.save(userT);
+
+
+        Client client4563 = Client.builder()
+                .name("jose")
+                .lastName("burgos")
+                .email("saulburgos689@gmail.com")
+                .phoneNumber("12345678")
+                .user(userT)
+                .build();
+        clientRepository.save(client4563);
+        Loan prestamo =Loan.builder().amount(100.00).client(client4563).PaymentDate(LocalDateTime.parse("2023-04-08T04:00:00.000Z", DateTimeFormatter.ISO_DATE_TIME)).amountOfPayments(6).interest(20.00).user(userT).build();
+
+        prestamoRepository.save(prestamo);
     }
 
     @AfterEach
@@ -74,20 +88,17 @@ class TransactionControllerTest {
 
     @Test
     void createTransactions() throws Exception {
-        Client client4563 = Client.builder()
-                .name("saul")
-                .lastName("burgos")
-                .email("saulburgos689@gmail.com")
-                .phoneNumber("12345678")
-                .user(userT)
-                .build();
-        clientRepository.save(client4563);
-        Loan prestamo =Loan.builder().amount(100.00).client(client4563).PaymentDate(LocalDateTime.parse("2023-04-08T04:00:00.000Z", DateTimeFormatter.ISO_DATE_TIME)).build();
-
-        prestamoRepository.save(prestamo);
+        User userDb =   userRepository.findOneByEmail(userT.getEmail()).orElseThrow();
+        System.out.println(userDb);
+        List<Loan> loanDb =  prestamoRepository.findAllByUserId(userDb.getId()).orElseThrow();
+        System.out.println(loanDb);
 
         String token = jwtService.generateToken(userT);
-        String body = "{\"amount\": \"1500.00\",\"transactionType\":\"pay\", \"loanId\": \"1\"}";
+        String body =String.format( "{\n" +
+                "    \"amount\": \"1000.00\",\n" +
+                "    \"transactionType\":\"pay\",\n" +
+                "    \"loanId\": \"%s\"\n" +
+                "}",loanDb.get(0).getId());
         mockMvc.perform(post("/transaction")
                         .header("Authorization","Bearer " + token)
                         .content(body)

@@ -17,17 +17,20 @@ public class LoanCreator {
 
     private final LoanRepository prestamoRepository;
 
-    public void create(Loan loan){
+    public void create(Loan loan) throws Exception {
+
         User currentUserId =  authService.getIdCurrentLoggedUser();
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }
 
+
         try {
             loan.setUser(currentUserId);
             prestamoRepository.save(loan);
         }catch (Exception e){
-            System.out.println("Error Insert Prestamo");
+            throw  new Exception(e);
+
         }
 
     }

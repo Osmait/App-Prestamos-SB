@@ -14,7 +14,7 @@ import java.util.Map;
 public class Upload {
 
 
-    public static Map uploadImage(File img) {
+    public static Map uploadImage(File img) throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put("cloud_name", "divez9sgt");
         config.put("api_key", "534463164334522");
@@ -29,8 +29,8 @@ public class Upload {
 
             return cloudinary.uploader().upload(img, prueba);
         } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+            throw  new Exception(exception);
         }
-       return prueba;
+
     }
 }

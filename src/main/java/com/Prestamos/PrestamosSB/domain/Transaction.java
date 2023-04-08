@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.domain;
 
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,16 +31,25 @@ public class Transaction {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "loan_id", referencedColumnName = "id",updatable = false)
+    @JsonIgnore
     private Loan loan;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
+    @JsonIgnore
     private User user;
 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", transactionType=" + transactionType +
+                ", amount=" + amount +
+                ", CreateAt=" + CreateAt +
+                ", loan=" + loan +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -1,11 +1,12 @@
 package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
+import com.Prestamos.PrestamosSB.application.find.FindUser;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
-import com.Prestamos.PrestamosSB.domain.User;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,27 +15,26 @@ public class ClientCreator {
 
 
     private final ClientRepository clientRepository;
+    private final FindUser findUser;
+
 
 
     private final AuthService authService;
 
-
-
-
-
-
     public  void  create(Client client) throws Exception{
 
-       User currentUserId =  authService.getIdCurrentLoggedUser();
+       String currentUserId =  authService.getIdCurrentLoggedUser().getEmail();
+        System.out.println(currentUserId);
 
-       client.setUser(currentUserId);
 
+       client.setUser(findUser.findByEmail(currentUserId));
+        System.out.println(client);
 
 
        try{
            clientRepository.save(client);
        }catch (Exception e ){
-           System.out.println("Error Insert Client In dataBase");
+
            throw  new Exception();
 
        }

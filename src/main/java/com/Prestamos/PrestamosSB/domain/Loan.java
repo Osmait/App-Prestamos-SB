@@ -1,5 +1,6 @@
 package com.Prestamos.PrestamosSB.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 
 import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
@@ -39,13 +41,28 @@ public class Loan  {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+
+    @OneToMany(mappedBy = "loan",fetch = FetchType.EAGER)
+    @JsonIgnore
     List<Transaction> transactions;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id",updatable = false)
     private Client client;
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
+    @JsonIgnore
     private User user;
 
-
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", PaymentDate=" + PaymentDate +
+                ", interest=" + interest +
+                ", amountOfPayments=" + amountOfPayments +
+                ", CreateAt=" + CreateAt +
+                '}';
+    }
 }

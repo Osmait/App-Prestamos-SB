@@ -5,7 +5,7 @@ import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,8 +32,9 @@ class AuthControllerTest {
    private UserRepository userRepository;
 
     @BeforeEach
-    void setUp(){
-        User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+    void setUp() throws Exception {
+        User user = User.builder().email("saulburgos7@gmail.com").name("saul").lastName("burgos").password("12345678").build();
+
         userCreator.create(user);
     }
 
@@ -47,7 +48,7 @@ class AuthControllerTest {
     @Test
     void autenticate() throws Exception {
 
-        String body ="{\"email\": \"saulburgos6@gmail.com\", \"password\": \"12345678\"}";
+        String body ="{\"email\": \"saulburgos7@gmail.com\", \"password\": \"12345678\"}";
         mockMvc.perform(post("/login").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

@@ -1,10 +1,9 @@
 package com.Prestamos.PrestamosSB.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 
 import java.util.List;
@@ -34,10 +33,14 @@ public class Client {
 
     private String img;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    List<Loan> loans ;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
+    @JsonIgnore
+    List<Loan> loans;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
+    @JsonIgnore
     private User user;
 
     @Override
@@ -48,6 +51,7 @@ public class Client {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", img='" + img + '\'' +
                 '}';
     }
 }

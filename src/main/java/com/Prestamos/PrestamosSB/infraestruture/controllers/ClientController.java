@@ -31,10 +31,10 @@ public class ClientController {
 
 
     @GetMapping("/client")
-    public ResponseEntity<List<Client>>getClient(){
+    public ResponseEntity<List<Client>>getClient() throws Exception {
 
         List<Client> clientList = findClient.findAllClientByUserId();
-        System.out.println(clientList);
+
         return new ResponseEntity<>(clientList, HttpStatus.OK);
 
     }
@@ -47,7 +47,7 @@ public class ClientController {
         }
 
         Client client = clientRequest.getClientFromDto();
-
+        System.out.println(client);
         clientCreator.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

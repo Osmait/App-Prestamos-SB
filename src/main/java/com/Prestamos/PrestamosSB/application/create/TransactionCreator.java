@@ -17,12 +17,17 @@ public class TransactionCreator {
     private  final TransactionRepository transactionRepository;
 
 
-    public void create(Transaction transaction){
+    public void create(Transaction transaction) throws Exception {
         User currentUserId =  authService.getIdCurrentLoggedUser();
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }
         transaction.setUser(currentUserId);
-        transactionRepository.save(transaction);
+        try{
+            transactionRepository.save(transaction);
+        }catch (Exception e){
+            throw  new Exception(e);
+        }
+
     }
 }
