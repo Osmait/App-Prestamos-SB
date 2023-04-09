@@ -47,7 +47,7 @@ public class TransactionController {
         return ResponseEntity.ok().body(findTransaction.findAllTransactionbyUser());
     }
     @DeleteMapping("/transaction/{id}")
-    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id){
+    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id) throws Exception {
         findTransaction.findAndDeleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

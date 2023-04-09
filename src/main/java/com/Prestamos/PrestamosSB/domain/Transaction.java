@@ -31,7 +31,7 @@ public class Transaction {
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "loan_id", referencedColumnName = "id",updatable = false)
     @JsonIgnore
     private Loan loan;

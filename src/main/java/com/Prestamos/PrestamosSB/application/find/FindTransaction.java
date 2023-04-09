@@ -31,8 +31,15 @@ public class FindTransaction {
         return transactionRepository.findByUserId(currentUserId).orElseThrow();
     }
 
-    public void findAndDeleteById(Long id){
-        transactionRepository.deleteById(id);
+    public void findAndDeleteById(Long id) throws Exception {
+
+        try{
+            transactionRepository.deleteById(id);
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+
+
     }
 
 

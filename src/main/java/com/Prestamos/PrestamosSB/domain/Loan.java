@@ -42,11 +42,11 @@ public class Loan  {
     private LocalDateTime CreateAt;
 
 
-    @OneToMany(mappedBy = "loan",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "loan",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnore
     List<Transaction> transactions;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id",updatable = false)
     private Client client;
     @ManyToOne

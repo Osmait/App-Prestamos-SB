@@ -34,11 +34,11 @@ public class Client {
     private String img;
 
 
-    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     @JsonIgnore
     List<Loan> loans;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
     @JsonIgnore
     private User user;
