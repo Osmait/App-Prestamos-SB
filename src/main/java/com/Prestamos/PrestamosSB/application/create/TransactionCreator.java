@@ -16,7 +16,6 @@ public class TransactionCreator {
     private final AuthService authService;
     private  final TransactionRepository transactionRepository;
 
-
     public void create(Transaction transaction) throws Exception {
         User currentUserId =  authService.getIdCurrentLoggedUser();
         if (currentUserId == null){

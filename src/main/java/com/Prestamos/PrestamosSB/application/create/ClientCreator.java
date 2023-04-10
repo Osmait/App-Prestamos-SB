@@ -24,19 +24,13 @@ public class ClientCreator {
     public  void  create(Client client) throws Exception{
 
        String currentUserId =  authService.getIdCurrentLoggedUser().getEmail();
-        System.out.println(currentUserId);
-
 
        client.setUser(findUser.findByEmail(currentUserId));
-        System.out.println(client);
-
 
        try{
            clientRepository.save(client);
        }catch (Exception e ){
-
            throw  new Exception();
-
        }
 
     }

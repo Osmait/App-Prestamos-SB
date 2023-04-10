@@ -20,10 +20,10 @@ public class LoanCreator {
     public void create(Loan loan) throws Exception {
 
         User currentUserId =  authService.getIdCurrentLoggedUser();
+
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }
-
 
         try {
             loan.setUser(currentUserId);

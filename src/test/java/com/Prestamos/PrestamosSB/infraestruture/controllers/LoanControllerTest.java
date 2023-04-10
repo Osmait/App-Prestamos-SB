@@ -63,9 +63,8 @@ class LoanControllerTest {
 
     @AfterEach
     void setDown(){
-
-        userRepository.deleteAll();
         clientRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -81,8 +80,6 @@ class LoanControllerTest {
 
         clientRepository.save(client434465);
        List<Client>clientDb =  clientRepository.findAllByUserId(userDb.getId()).orElseThrow();
-        System.out.println("Aqui!!!!!!!!!!!!!!!!!111");
-        System.out.println(clientDb.get(0).getId());
 
 
         String  tokenL =jwtService.generateToken(userLoan);

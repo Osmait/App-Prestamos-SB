@@ -38,6 +38,7 @@ public class User  implements UserDetails {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)

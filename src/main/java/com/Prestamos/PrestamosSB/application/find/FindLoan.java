@@ -67,9 +67,9 @@ public class FindLoan {
         return  prestamoList;
     }
     public List<Balance> FindLoanBalance(Long id) {
-        System.out.println(id);
+
         List<Object[]> balances = loanRepository.findLoanBalance(id);
-        System.out.println(balances);
+
         return balances.stream().map(row -> {
             Balance balance = new Balance();
             balance.setId((Long) row[0]);

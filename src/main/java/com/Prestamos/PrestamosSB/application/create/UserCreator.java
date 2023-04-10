@@ -21,6 +21,13 @@ public class UserCreator {
 
 
     public void create( User user) throws Exception {
+
+      boolean emailDb =   userRepository.findOneByEmail(user.getEmail()).isEmpty();
+
+      if (!emailDb){
+          throw new Exception("Email Take");
+      }
+
         String passwordEncode = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncode);
         try {

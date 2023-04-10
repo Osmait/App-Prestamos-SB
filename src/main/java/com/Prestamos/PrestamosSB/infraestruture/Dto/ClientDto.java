@@ -12,13 +12,13 @@ import lombok.Data;
 public class ClientDto {
 
     @NotNull(message = "Name is require")
-    @Size(min = 1,max = 50)
+    @Size(min = 1,max = 50, message = "Name is require")
     private String name;
     @NotNull(message = "LastName is require")
-    @Size(min = 1,max = 50)
+    @Size(min = 1,max = 50,message = "LastName is require")
     private String lastName;
 
-   @Email
+   @Email(message = "Not is a Email")
     private String email;
 
     @Size(min = 6, max = 20)
@@ -36,6 +36,5 @@ public class ClientDto {
         return client;
     }
 
-    public ClientDto() {
-    }
+
 }
