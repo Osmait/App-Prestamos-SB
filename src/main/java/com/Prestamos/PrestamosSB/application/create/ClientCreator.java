@@ -27,11 +27,8 @@ public class ClientCreator {
 
        client.setUser(findUser.findByEmail(currentUserId));
 
-       try{
-           clientRepository.save(client);
-       }catch (Exception e ){
-           throw  new Exception();
-       }
+       clientRepository.save(client);
+
 
     }
 }

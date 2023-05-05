@@ -4,8 +4,8 @@ package com.Prestamos.PrestamosSB.application.find;
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Transaction;
 import com.Prestamos.PrestamosSB.domain.TransactionRepository;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -26,18 +26,17 @@ public class FindTransaction {
 
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
         return transactionRepository.findByUserId(currentUserId).orElseThrow();
     }
 
-    public void findAndDeleteById(Long id) throws Exception {
 
-        try{
+
+    public void findAndDeleteById(Long id)  {
+
             transactionRepository.deleteById(id);
-        }catch (Exception e){
-            throw new Exception(e);
-        }
+
 
 
     }

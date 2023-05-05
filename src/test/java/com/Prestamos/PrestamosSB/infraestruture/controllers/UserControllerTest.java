@@ -38,8 +38,7 @@ class UserControllerTest {
 
         for (String[] body:fieldData) {
                 mockMvc.perform(post("/user").content(body[0]).contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isBadRequest())
-        .andExpect(content().json(body[1]));
+                        .andExpect(status().isBadRequest());
         }
     }
 

@@ -5,6 +5,7 @@ import com.Prestamos.PrestamosSB.domain.Loan;
 
 import com.Prestamos.PrestamosSB.domain.LoanRepository;
 import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,21 +18,18 @@ public class LoanCreator {
 
     private final LoanRepository prestamoRepository;
 
-    public void create(Loan loan) throws Exception {
+    public void create(Loan loan)  {
 
         User currentUserId =  authService.getIdCurrentLoggedUser();
 
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
 
-        try {
+
             loan.setUser(currentUserId);
             prestamoRepository.save(loan);
-        }catch (Exception e){
-            throw  new Exception(e);
 
-        }
 
     }
 }

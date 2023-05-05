@@ -16,6 +16,8 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class LoanDto {
 
+
+
     @NotNull(message = "amount is require")
     @Size(min = 1)
     private Double amount;

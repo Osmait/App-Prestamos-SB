@@ -37,6 +37,9 @@ public class Loan  {
     @Column(name ="amount_of_payments",nullable = false)
     private Integer amountOfPayments;
 
+//    @Column(name = "status")
+//    private boolean status = false;
+
     @Column(name = "create_at" )
     @CreationTimestamp
     private LocalDateTime CreateAt;

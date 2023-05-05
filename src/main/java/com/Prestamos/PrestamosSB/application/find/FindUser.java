@@ -3,9 +3,9 @@ package com.Prestamos.PrestamosSB.application.find;
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class FindUser {
     public User findProfile(){
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
 
-        return userRepository.findById(currentUserId).orElseThrow();
+        return userRepository.findById(currentUserId).orElseThrow( ()-> new RuntimeException("User not found"));
     }
 }

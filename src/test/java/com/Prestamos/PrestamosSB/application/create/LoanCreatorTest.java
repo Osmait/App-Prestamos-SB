@@ -27,7 +27,7 @@ class LoanCreatorTest {
     private AuthService authService;
 
     @Test
-    void create() throws Exception {
+    void create()  {
         User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         Client client = Client.builder()
                 .name("saul")

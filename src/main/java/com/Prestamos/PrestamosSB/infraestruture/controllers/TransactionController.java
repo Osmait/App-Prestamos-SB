@@ -28,7 +28,7 @@ public class TransactionController {
 
 
     @PostMapping("/transaction")
-    public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request) throws Exception {
+    public ResponseEntity<HttpStatus>createTransactions(@RequestBody TransactionDto request) {
 
         Loan loan = findPrestamos.findLoanById(request.getLoanId());
         request.setLoan(loan);
@@ -47,7 +47,7 @@ public class TransactionController {
         return ResponseEntity.ok().body(findTransaction.findAllTransactionbyUser());
     }
     @DeleteMapping("/transaction/{id}")
-    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id) throws Exception {
+    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id)  {
         findTransaction.findAndDeleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

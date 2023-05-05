@@ -6,6 +6,7 @@ import com.Prestamos.PrestamosSB.application.find.FindClient;
 import com.Prestamos.PrestamosSB.domain.Client;
 
 import com.Prestamos.PrestamosSB.infraestruture.Dto.ClientDto;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.BadRequest;
 import com.Prestamos.PrestamosSB.infraestruture.utils.ValidateBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class ClientController {
 
     private final ClientCreator clientCreator;
     private final FindClient findClient;
+    private  final Upload uploadImg;
+    private  final ValidateBody validateBody;
 
 
     @GetMapping("/client")
@@ -42,12 +45,11 @@ public class ClientController {
     @PostMapping("/client")
     public ResponseEntity<Map<String, String>> createClient(@Validated @RequestBody ClientDto clientRequest,  BindingResult result) throws Exception {
         if (result.hasErrors()){
-
-         return ValidateBody.ValidFilds(result);
+         throw new BadRequest(validateBody.ValidFilds(result).toString());
         }
 
         Client client = clientRequest.getClientFromDto();
-        System.out.println(client);
+
         clientCreator.create(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -57,7 +59,7 @@ public class ClientController {
 
         File file = File.createTempFile("temp", null);
         imagen.transferTo(file);
-        String imgString =  Upload.uploadImage(file).get("secure_url").toString();
+        String imgString =  uploadImg.uploadImage(file).get("secure_url").toString();
          Client client =  findClient.findClientById(id);
          client.setImg(imgString);
          clientCreator.create(client);

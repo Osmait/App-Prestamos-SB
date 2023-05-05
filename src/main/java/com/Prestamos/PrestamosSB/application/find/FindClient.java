@@ -46,6 +46,8 @@ public class FindClient {
 
     }
 
+
+
     public void findAndDeleteById(Long id){
         clientRepository.deleteById(id);
     }

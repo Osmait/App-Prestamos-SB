@@ -5,9 +5,10 @@ import com.Prestamos.PrestamosSB.domain.Balance;
 import com.Prestamos.PrestamosSB.domain.Loan;
 
 import com.Prestamos.PrestamosSB.domain.LoanRepository;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.NotFoundException;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -27,7 +28,7 @@ public class FindLoan {
     public List<Loan>findLoanByDate( ){
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
 
         List<Loan> prestamoList;
@@ -40,7 +41,13 @@ public class FindLoan {
             return new ArrayList<>();
         }
 
-        return prestamoList.stream().filter( loan -> loan.getPaymentDate().getDayOfMonth() == LocalDateTime.now().getDayOfMonth()).toList();
+        return prestamoList.stream().filter(
+                loan -> loan.getPaymentDate()
+                        .getDayOfMonth() == LocalDateTime.now()
+                        .getDayOfMonth() || loan.getPaymentDate()
+                        .plusDays(15L)
+                        .getDayOfMonth() == LocalDateTime.now()
+                        .getDayOfMonth()).toList();
 
 
     }
@@ -48,22 +55,22 @@ public class FindLoan {
     public List<Loan> FindAllLoan(Long id){
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
 
         List<Loan> prestamoList;
-        prestamoList =  loanRepository.findAllByClientId(id).orElseThrow();
+        prestamoList =  loanRepository.findAllByClientId(id).orElseThrow(()-> new NotFoundException("Client Not Found"));
         return  prestamoList;
     }
 
     public List<Loan> FindAllLoanByUser(){
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
-            throw new UsernameNotFoundException("User Not Auth");
+            throw new UnAuthorizedException("User Not Auth");
         }
 
         List<Loan> prestamoList;
-        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow();
+        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow( ()-> new NotFoundException(" Not Found"));
         return  prestamoList;
     }
     public List<Balance> FindLoanBalance(Long id) {
@@ -81,7 +88,7 @@ public class FindLoan {
     }
 
     public Loan findLoanById(Long id){
-      return  loanRepository.findById(id).orElseThrow();
+      return  loanRepository.findById(id).orElseThrow(()-> new NotFoundException("Loan Not Found"));
     }
     public void findAndDeleteById(Long id){
         loanRepository.deleteById(id);

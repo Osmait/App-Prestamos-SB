@@ -5,6 +5,8 @@ import com.Prestamos.PrestamosSB.application.find.FindUser;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
 
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.BadRequest;
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.DuplicateResourceException;
 import com.Prestamos.PrestamosSB.infraestruture.utils.ValidateBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -29,6 +30,8 @@ public class UserController {
 
     private final UserCreator userCreator;
     private final FindUser findUser;
+    private final ValidateBody validateBody;
+
 
 
 
@@ -40,18 +43,18 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody UserDto user, BindingResult result) throws Exception {
+    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody UserDto user, BindingResult result) {
         if(result.hasErrors()) {
-           return ValidateBody.ValidFilds(result);
+
+            throw new BadRequest(validateBody.ValidFilds(result).toString());
         }
 
         User validate = findUser.findByEmail(user.getEmail());
 
         if (Objects.equals(validate.getEmail(), user.getEmail())){
-            Map<String,String> errors = new HashMap<>();
-            errors.put("Error","Email exits");
-            return ResponseEntity.badRequest().body(errors);
+            throw  new DuplicateResourceException("Email exits");
         }
+
 
         User newUser =  user.getUserFromDto();
         userCreator.create(newUser);

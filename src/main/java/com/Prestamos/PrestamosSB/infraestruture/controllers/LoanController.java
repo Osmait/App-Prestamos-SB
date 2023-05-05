@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.LoanCreator;
+import com.Prestamos.PrestamosSB.application.create.LoanUpdate;
 import com.Prestamos.PrestamosSB.application.find.FindClient;
 import com.Prestamos.PrestamosSB.application.find.FindLoan;
 import com.Prestamos.PrestamosSB.domain.Balance;
@@ -23,6 +24,7 @@ public class LoanController {
     private  final FindClient findClient;
 
     private final FindLoan findPrestamos;
+    private  final LoanUpdate loanUpdate;
 
     @GetMapping("/loan/{id}")
     public ResponseEntity<List<Loan>>getAllLoanByClientId(@PathVariable Long id){
@@ -41,7 +43,7 @@ public class LoanController {
     public ResponseEntity<List<Loan>>getLoanPayment(){
 
        List<Loan>response = findPrestamos.findLoanByDate();
-        System.out.println(response);
+
 
         return new ResponseEntity<>(response,HttpStatus.OK);
 
@@ -58,16 +60,32 @@ public class LoanController {
     }
 
     @PostMapping("/loan")
-    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest) throws Exception {
-        System.out.println(loanRequest);
+    public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest)  {
         Client client = findClient.findClientById(loanRequest.getClientId());
         loanRequest.setClient(client);
-       Loan loan  = loanRequest.getLoanFromDto();
-        System.out.println(loan);
+        Loan loan  = loanRequest.getLoanFromDto();
+
 
         prestamoCreator.create(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
+    @PutMapping("/loan/{id}")
+    public ResponseEntity<HttpStatus>updateLoan(@RequestBody LoanDto loanRequest, @PathVariable Long id) {
+        Client client = findClient.findClientById(loanRequest.getClientId());
+        loanRequest.setClient(client);
+        Loan loan  = loanRequest.getLoanFromDto();
+        loan.setId(id);
+
+        loanUpdate.update(loan);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
+
 
     @DeleteMapping("/loan/{id}")
     public  ResponseEntity<HttpStatus>deleteLoan(@PathVariable Long id){

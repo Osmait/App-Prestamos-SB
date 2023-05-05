@@ -23,7 +23,7 @@ class UserCreatorTest {
     private UserCreator userCreator;
 
     @Test
-    void create() throws Exception {
+    void create()  {
         User user = User.builder().email("saulburgos6@gmail.com").name("saul").lastName("burgos").password("12345678").build();
         userCreator.create(user);
 
