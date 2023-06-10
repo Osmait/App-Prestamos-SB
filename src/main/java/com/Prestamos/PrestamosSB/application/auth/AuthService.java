@@ -19,7 +19,6 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
 
-
     private final UserRepository userRepository;
 
 
@@ -28,15 +27,17 @@ public class AuthService {
 
 
     public AuthReponse authenticate(AuthRequest request){
-        authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
+
+        Authentication authentication =   authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
                 request.getEmail(),
                 request.getPassword()
         ));
-        User user = userRepository.findOneByEmail(request.getEmail()).orElseThrow();
 
-        String token = jwtService.generateToken(user);
+        User user = (User)authentication.getPrincipal();
+        String token = jwtService.issueToken(user.getEmail(),user.getAuthorities().toString());
 
         return new AuthReponse(token);
+
     }
 
     public  User getIdCurrentLoggedUser(){

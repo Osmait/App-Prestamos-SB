@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,7 +29,8 @@ public class FindTransaction {
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }
-        return transactionRepository.findByUserId(currentUserId).orElseThrow();
+//        return transactionRepository.findByUserId(currentUserId).orElseThrow();
+        return  new ArrayList<>();
     }
 
 

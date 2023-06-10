@@ -5,6 +5,7 @@ import com.Prestamos.PrestamosSB.application.find.FindUser;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
 
+import com.Prestamos.PrestamosSB.infraestruture.Dto.UserResponse;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.BadRequest;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.DuplicateResourceException;
 import com.Prestamos.PrestamosSB.infraestruture.utils.ValidateBody;
@@ -36,8 +37,8 @@ public class UserController {
 
 
     @GetMapping("/user")
-    public ResponseEntity<List<User>> getUser(){
-       List<User> userList =  findUser.findAllUser();
+    public ResponseEntity<List<UserResponse>> getUser(){
+       List<UserResponse> userList =  findUser.findAllUser();
         return new ResponseEntity<>(userList, HttpStatus.OK);
 
     }

@@ -13,5 +13,5 @@ public interface TransactionRepository extends CrudRepository<Transaction,Long> 
     Optional<List<Transaction>> findAllByLoanId(Long id);
 
 
-    Optional<List<Transaction>> findByUserId(Long UserId);
+//    Optional<List<Transaction>> findByUserId(Long UserId);
 }

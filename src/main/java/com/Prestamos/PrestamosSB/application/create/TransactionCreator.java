@@ -21,7 +21,7 @@ public class TransactionCreator {
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }
-        transaction.setUser(currentUserId);
+//        transaction.setUser(currentUserId);
 
         transactionRepository.save(transaction);
 

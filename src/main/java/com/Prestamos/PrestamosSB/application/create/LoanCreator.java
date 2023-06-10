@@ -27,7 +27,7 @@ public class LoanCreator {
         }
 
 
-            loan.setUser(currentUserId);
+//            loan.setUser(currentUserId);
             prestamoRepository.save(loan);
 
 

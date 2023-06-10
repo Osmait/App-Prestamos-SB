@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.domain;
 
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,29 +28,21 @@ public class Transaction {
 
     private Double amount;
 
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private  boolean deleted;
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
     @ManyToOne
-    @JoinColumn(name = "loan_id", referencedColumnName = "id",updatable = false)
-    @JsonIgnore
+    @JoinColumn(name = "loan_id")
+    @JsonBackReference
     private Loan loan;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
-    @JsonIgnore
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+//    private User user;
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", transactionType=" + transactionType +
-                ", amount=" + amount +
-                ", CreateAt=" + CreateAt +
-                ", loan=" + loan +
-                ", user=" + user +
-                '}';
-    }
+
 }

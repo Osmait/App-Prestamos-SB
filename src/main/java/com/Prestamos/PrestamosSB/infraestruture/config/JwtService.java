@@ -10,74 +10,78 @@ import java.security.Key;
 import io.jsonwebtoken.io.Decoders;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 
 @Service
 public class JwtService {
 
-
     @Value("${jwt.secret}")
-    private static String SECRET_KEY ;
+    private  String SECRET_KEY;
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public String issueToken(String subject) {
+        return issueToken(subject, Map.of());
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+    public String issueToken(String subject, String ...scopes) {
+        return issueToken(subject, Map.of("scopes", scopes));
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String issueToken(String subject, List<String> scopes) {
+        return issueToken(subject, Map.of("scopes", scopes));
     }
 
 
-
-    public  static  String generateToken( Map<String, Object> extraClaims,
-                                          UserDetails userDetails){
-
+    public String issueToken(
+            String subject,
+            Map<String, Object> claims) {
         return Jwts
                 .builder()
-                .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 18000 * 30000))
-                .signWith(getSignInKey(),SignatureAlgorithm.HS256).compact();
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(
+                        Date.from(
+                                Instant.now().plus(15, DAYS)
+                        )
+                )
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    public String getSubject(String token) {
+        return getClaims(token).getSubject();
     }
 
-    private boolean isTokenExpired(String token) {
-            return extractExpiration(token).before(new Date());
+    private Claims getClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
-    private Date extractExpiration(String token) {
+    private Key getSigningKey() {
 
-        return extractClaim(token, Claims::getExpiration);
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    private Claims extractAllClaims(String token) {
-
-            return Jwts
-                    .parserBuilder()
-                    .setSigningKey(getSignInKey())
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-
+    public boolean isTokenValid(String jwt, String username) {
+        String subject = getSubject(jwt);
+        return subject.equals(username) && !isTokenExpired(jwt);
     }
 
-    private static Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
+    private boolean isTokenExpired(String jwt) {
+        Date today = Date.from(Instant.now());
+        return getClaims(jwt).getExpiration().before(today);
     }
 
 

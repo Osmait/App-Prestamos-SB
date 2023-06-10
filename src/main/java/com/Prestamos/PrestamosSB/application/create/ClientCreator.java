@@ -5,6 +5,7 @@ import com.Prestamos.PrestamosSB.application.find.FindUser;
 import com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.ClientRepository;
 
+import com.Prestamos.PrestamosSB.domain.User;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class ClientCreator {
 
 
     private final ClientRepository clientRepository;
-    private final FindUser findUser;
+//    private final FindUser findUser;
 
 
 
@@ -23,9 +24,9 @@ public class ClientCreator {
 
     public  void  create(Client client) throws Exception{
 
-       String currentUserId =  authService.getIdCurrentLoggedUser().getEmail();
+       User currentUserId =  authService.getIdCurrentLoggedUser();
 
-       client.setUser(findUser.findByEmail(currentUserId));
+       client.setUser(currentUserId);
 
        clientRepository.save(client);
 

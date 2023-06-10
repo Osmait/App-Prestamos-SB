@@ -1,6 +1,8 @@
 package com.Prestamos.PrestamosSB.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,22 +42,27 @@ public class Loan  {
 //    @Column(name = "status")
 //    private boolean status = false;
 
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private  boolean deleted;
+
     @Column(name = "create_at" )
     @CreationTimestamp
     private LocalDateTime CreateAt;
 
 
-    @OneToMany(mappedBy = "loan",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JsonIgnore
+    @OneToMany(mappedBy = "loan")
+    @JsonManagedReference
     List<Transaction> transactions;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id",updatable = false)
+    @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Client client;
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
-    @JsonIgnore
-    private User user;
+
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+//    private User user;
 
     @Override
     public String toString() {

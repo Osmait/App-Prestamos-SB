@@ -1,27 +1,31 @@
 package com.Prestamos.PrestamosSB.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
-
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.*;
 
 
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name = "users")
-public class User  implements UserDetails {
+public class User   implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -29,61 +33,70 @@ public class User  implements UserDetails {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(nullable = false, name = "last_name")
     private String lastName;
 
-
-
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
     @JsonIgnore
     private String password;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    @JsonIgnore
-    List<Client> clients ;
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    @JsonIgnore
-    List<Loan> loans;
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    @JsonIgnore
-    List<Transaction> transactions;
+    @Column(name = "deleted", nullable = false,columnDefinition = "boolean default false")
+    private boolean deleted;
 
+    @Column(name = "create_at")
+    @CreationTimestamp
+    private LocalDateTime CreateAt;
 
-
-
+    @OneToMany(mappedBy = "user" )
+    @JsonManagedReference
+    private List<Client> clients;
 
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return email;
     }
-    @JsonIgnore
+
     @Override
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+
+    @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
-    @JsonIgnore
+
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
-    @JsonIgnore
+
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    @JsonIgnore
+
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

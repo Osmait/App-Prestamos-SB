@@ -3,6 +3,8 @@ package com.Prestamos.PrestamosSB.application.find;
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.User;
 import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
+import com.Prestamos.PrestamosSB.infraestruture.Dto.UserResponse;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 
@@ -20,11 +22,17 @@ public class FindUser {
 
     private final AuthService authService;
 
-    public List<User>findAllUser(){
+    public List<UserResponse>findAllUser(){
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
 
-        return list;
+        return list.stream().map(user -> new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getCreateAt()
+        )).toList();
     }
 
     public User findByEmail(String email){

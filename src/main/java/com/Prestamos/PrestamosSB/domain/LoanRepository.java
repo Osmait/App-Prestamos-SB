@@ -19,7 +19,7 @@ public interface LoanRepository extends JpaRepository<Loan,Long> {
 
     Optional<List<Loan>> findAllByClientId(Long ClientId);
 
-    Optional<List<Loan>> findAllByUserId(Long UserId);
+//    Optional<List<Loan>> findAllByUserId(Long UserId);
 
 
     @Query(value = "SELECT loan.id, loan.amount - SUM(t.amount) as balance, loan.create_at "

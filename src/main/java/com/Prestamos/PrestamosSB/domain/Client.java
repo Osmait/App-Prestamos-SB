@@ -1,6 +1,8 @@
 package com.Prestamos.PrestamosSB.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,25 +35,18 @@ public class Client {
 
     private String img;
 
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private  boolean deleted;
 
-    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-    @JsonIgnore
-    List<Loan> loans;
+
+//    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+//    @JsonManagedReference
+//    List<Loan> loans;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id",updatable = false)
-    @JsonIgnore
+    @JsonBackReference
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", img='" + img + '\'' +
-                '}';
-    }
+
 }

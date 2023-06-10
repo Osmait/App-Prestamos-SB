@@ -31,6 +31,7 @@ public class FindClient {
     public  List<Client>findAllClientByUserId() throws Exception {
 
         Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        System.out.println(currentUserId.toString());
         if (currentUserId == null){
             throw new UsernameNotFoundException("User Not Auth");
         }

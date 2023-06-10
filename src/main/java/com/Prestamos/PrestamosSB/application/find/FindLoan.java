@@ -31,25 +31,25 @@ public class FindLoan {
             throw new UnAuthorizedException("User Not Auth");
         }
 
-        List<Loan> prestamoList;
+        List<Loan> prestamoList =  new ArrayList<>();
+;
+//        prestamoList =  loanRepository.findAllByUserId(currentUserId)
+//                .orElse(new ArrayList<>());
 
-        prestamoList =  loanRepository.findAllByUserId(currentUserId)
-                .orElse(new ArrayList<>());
+//        if (prestamoList.size() <= 0){
+//
+//            return new ArrayList<>();
+//        }
+//
+//        return prestamoList.stream().filter(
+//                loan -> loan.getPaymentDate()
+//                        .getDayOfMonth() == LocalDateTime.now()
+//                        .getDayOfMonth() || loan.getPaymentDate()
+//                        .plusDays(15L)
+//                        .getDayOfMonth() == LocalDateTime.now()
+//                        .getDayOfMonth()).toList();
 
-        if (prestamoList.size() <= 0){
-
-            return new ArrayList<>();
-        }
-
-        return prestamoList.stream().filter(
-                loan -> loan.getPaymentDate()
-                        .getDayOfMonth() == LocalDateTime.now()
-                        .getDayOfMonth() || loan.getPaymentDate()
-                        .plusDays(15L)
-                        .getDayOfMonth() == LocalDateTime.now()
-                        .getDayOfMonth()).toList();
-
-
+    return prestamoList;
     }
 
     public List<Loan> FindAllLoan(Long id){
@@ -70,7 +70,8 @@ public class FindLoan {
         }
 
         List<Loan> prestamoList;
-        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow( ()-> new NotFoundException(" Not Found"));
+//        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow( ()-> new NotFoundException(" Not Found"));
+        prestamoList = new ArrayList<>();
         return  prestamoList;
     }
     public List<Balance> FindLoanBalance(Long id) {
