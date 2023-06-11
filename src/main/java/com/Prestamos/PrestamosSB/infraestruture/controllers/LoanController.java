@@ -28,7 +28,7 @@ public class LoanController {
     private  final LoanUpdate loanUpdate;
 
     @GetMapping("/loan/{id}")
-    public ResponseEntity<List<Loan>>getAllLoanByClientId(@PathVariable Long id){
+    public ResponseEntity<List<Loan>>getAllLoanByClientId(@PathVariable UUID id){
 
         List<Loan> loanList = findPrestamos.FindAllLoan(id);
             return ResponseEntity.ok().body(loanList);
@@ -55,27 +55,25 @@ public class LoanController {
 
 
     @GetMapping("/loan/balance/{id}")
-    public ResponseEntity<List<Balance>>getLoan(@PathVariable Long id){
+    public ResponseEntity<List<Balance>>getLoan(@PathVariable UUID id){
         List<Balance> loanList = findPrestamos.FindLoanBalance(id);
         return ResponseEntity.ok().body(loanList);
     }
 
     @PostMapping("/loan")
     public ResponseEntity<HttpStatus>CreateLoan(@RequestBody LoanDto loanRequest)  {
-        Client client = findClient.findClientById(loanRequest.getClientId());
-        loanRequest.setClient(client);
-        Loan loan  = loanRequest.getLoanFromDto();
+//        Client client = findClient.findClientById(loanRequest.getClientId());
 
-
-        prestamoCreator.create(loan);
+//        Loan loan  = loanRequest.getLoanFromDto();
+        prestamoCreator.create(loanRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
     @PutMapping("/loan/{id}")
     public ResponseEntity<HttpStatus>updateLoan(@RequestBody LoanDto loanRequest, @PathVariable UUID id) {
-        Client client = findClient.findClientById(loanRequest.getClientId());
-        loanRequest.setClient(client);
+//        Client client = findClient.findClientById(loanRequest.getClientId());
+//        loanRequest.setClient(client);
         Loan loan  = loanRequest.getLoanFromDto();
         loan.setId(id);
 

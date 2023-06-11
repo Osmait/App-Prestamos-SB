@@ -3,10 +3,14 @@ package com.Prestamos.PrestamosSB.domain.Client;
 import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 import com.Prestamos.PrestamosSB.domain.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,10 +42,9 @@ public class Client {
     @Column(name = "deleted",columnDefinition = "boolean default false")
     private  boolean deleted;
 
-
-    @OneToMany(mappedBy = "client")
-    @JsonManagedReference
-    List<Loan> loans;
+    @Column(name = "create_at")
+    @CreationTimestamp
+    private LocalDateTime CreateAt;
 
     @ManyToOne
     @JsonBackReference

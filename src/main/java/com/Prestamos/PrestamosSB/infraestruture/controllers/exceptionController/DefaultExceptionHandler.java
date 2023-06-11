@@ -32,8 +32,8 @@ public class DefaultExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiError> handleException(RuntimeException e) {
-        ApiError apiError = new ApiError(e.getMessage(), HttpStatus.FORBIDDEN.value(), LocalDateTime.now());
-        return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
+        ApiError apiError = new ApiError(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
+        return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(DuplicateResourceException.class)

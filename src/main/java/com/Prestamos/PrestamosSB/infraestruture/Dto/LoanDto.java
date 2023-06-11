@@ -36,12 +36,12 @@ public class LoanDto {
     @NotNull
     private Integer amountOfPayments;
 
-    private Client client;
+
 
 
     public Loan getLoanFromDto(){
         return Loan.builder()
-                .client(client)
+                .clientId(clientId)
                 .amount(amount)
                 .PaymentDate(LocalDateTime.parse(paymentDate, DateTimeFormatter.ISO_DATE_TIME))
                 .amountOfPayments(amountOfPayments)

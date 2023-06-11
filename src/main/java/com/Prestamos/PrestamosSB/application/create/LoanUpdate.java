@@ -21,7 +21,7 @@ public class LoanUpdate {
         Loan loanDB = loanRepository.findById(loan.getId()).orElseThrow(() -> new NotFoundException("Loan No Found"));
 
         loanDB.setAmount(loan.getAmount());
-        loanDB.setClient(loan.getClient());
+        loanDB.setClientId(loan.getClientId());
         loanDB.setInterest(loan.getInterest());
         loanDB.setAmountOfPayments(loan.getAmountOfPayments());
 

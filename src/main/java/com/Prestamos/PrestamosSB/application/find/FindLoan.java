@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,36 +32,30 @@ public class FindLoan {
             throw new UnAuthorizedException("User Not Auth");
         }
 
-        List<Loan> prestamoList =  new ArrayList<>();
+        List<Loan> prestamoList;
 
-//        prestamoList =  loanRepository.findAllByUserId(currentUserId)
-//                .orElse(new ArrayList<>());
+        prestamoList =  loanRepository.findAllByClientId(currentUserId)
+                .orElse(new ArrayList<>());
 
-//        if (prestamoList.size() <= 0){
-//
-//            return new ArrayList<>();
-//        }
-//
-//        return prestamoList.stream().filter(
-//                loan -> loan.getPaymentDate()
-//                        .getDayOfMonth() == LocalDateTime.now()
-//                        .getDayOfMonth() || loan.getPaymentDate()
-//                        .plusDays(15L)
-//                        .getDayOfMonth() == LocalDateTime.now()
-//                        .getDayOfMonth()).toList();
+        if (prestamoList.size() <= 0){
 
-    return prestamoList;
-    }
-
-    public List<Loan> FindAllLoan(Long id){
-        UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
-        if (currentUserId == null){
-            throw new UnAuthorizedException("User Not Auth");
+            return new ArrayList<>();
         }
 
-        List<Loan> prestamoList;
-        prestamoList =  loanRepository.findAllByClientId(id).orElseThrow(()-> new NotFoundException("Client Not Found"));
-        return  prestamoList;
+        return prestamoList.stream().filter(
+                loan -> loan.getPaymentDate()
+                        .getDayOfMonth() == LocalDateTime.now()
+                        .getDayOfMonth() || loan.getPaymentDate()
+                        .plusDays(15L)
+                        .getDayOfMonth() == LocalDateTime.now()
+                        .getDayOfMonth()).toList();
+
+
+    }
+
+    public List<Loan> FindAllLoan(UUID id){
+
+        return loanRepository.findAllByClientId(id).orElseThrow(()-> new NotFoundException("Client Not Found"));
     }
 
     public List<Loan> FindAllLoanByUser(){
@@ -70,11 +65,11 @@ public class FindLoan {
         }
 
         List<Loan> prestamoList;
-//        prestamoList =  loanRepository.findAllByUserId(currentUserId).orElseThrow( ()-> new NotFoundException(" Not Found"));
-        prestamoList = new ArrayList<>();
+        prestamoList =  loanRepository.findAllByClientId(currentUserId).orElseThrow( ()-> new NotFoundException(" Not Found"));
+
         return  prestamoList;
     }
-    public List<Balance> FindLoanBalance(Long id) {
+    public List<Balance> FindLoanBalance(UUID id) {
 
         List<Object[]> balances = loanRepository.findLoanBalance(id);
 

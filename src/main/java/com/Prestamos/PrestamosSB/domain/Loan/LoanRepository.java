@@ -19,15 +19,15 @@ public interface LoanRepository extends JpaRepository<Loan, UUID> {
 
 //    Optional<List<Loan>>findAllByPaymentDateBetween(LocalDateTime payment_date, LocalDateTime payment_date2);
 
-    Optional<List<Loan>> findAllByClientId(Long ClientId);
+    Optional<List<Loan>> findAllByClientId(UUID ClientId);
 
-//    Optional<List<Loan>> findAllByUserId(Long UserId);
+//    Optional<List<Loan>> findAllByUserId(UUID UserId);
 
 
     @Query(value = "SELECT loan.id, loan.amount - SUM(t.amount) as balance, loan.create_at "
             + "FROM loan JOIN transaction t ON loan.id = t.loan_id where loan.id = :id "
             + "GROUP BY loan.id", nativeQuery = true)
-   List<Object[]>findLoanBalance(@Param("id") Long id);
+   List<Object[]>findLoanBalance(@Param("id") UUID id);
 
 
 

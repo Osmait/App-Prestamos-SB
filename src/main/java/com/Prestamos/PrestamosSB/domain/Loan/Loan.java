@@ -2,6 +2,7 @@ package com.Prestamos.PrestamosSB.domain.Loan;
 
 import com.Prestamos.PrestamosSB.domain.Client.Client;
 import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -9,11 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 
 
 import java.time.LocalDateTime;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -56,25 +59,10 @@ public class Loan  {
     @JsonManagedReference
     List<Transaction> transactions;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    @JsonBackReference
-    private Client client;
+    @Column(name = "client_id",nullable = false)
+    private UUID clientId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    @JsonBackReference
-//    private User user;
 
-    @Override
-    public String toString() {
-        return "Loan{" +
-                "id=" + id +
-                ", amount=" + amount +
-                ", PaymentDate=" + PaymentDate +
-                ", interest=" + interest +
-                ", amountOfPayments=" + amountOfPayments +
-                ", CreateAt=" + CreateAt +
-                '}';
-    }
+
+
 }

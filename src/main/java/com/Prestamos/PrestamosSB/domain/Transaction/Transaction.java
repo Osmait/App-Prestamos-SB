@@ -2,6 +2,7 @@ package com.Prestamos.PrestamosSB.domain.Transaction;
 
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
 import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,10 +41,10 @@ public class Transaction {
     @JsonBackReference
     private Loan loan;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    @JsonBackReference
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 
 
 }

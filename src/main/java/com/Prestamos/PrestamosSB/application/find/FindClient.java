@@ -4,6 +4,7 @@ import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Client.Client;
 import com.Prestamos.PrestamosSB.domain.Client.ClientRepository;
 
+import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,11 +26,11 @@ public class FindClient {
 
     public  Client findClientById(UUID id){
 
-        return clientRepository.findById(id).orElseThrow();
+        return clientRepository.findById(id).orElseThrow( () -> new NotFoundException("Client Not Found"));
     }
 
 
-    public  List<Client>findAllClientByUserId() throws Exception {
+    public  List<Client>findAllClientByUserId() {
 
         UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
         System.out.println(currentUserId.toString());
@@ -37,18 +38,8 @@ public class FindClient {
             throw new UsernameNotFoundException("User Not Auth");
         }
 
-        try{
-
            return  clientRepository.findAllByUserId(currentUserId).orElseThrow();
-
-        }catch (Exception e){
-
-            throw new Exception(e);
-        }
-
     }
-
-
 
     public void findAndDeleteById(UUID id){
         clientRepository.deleteById(id);

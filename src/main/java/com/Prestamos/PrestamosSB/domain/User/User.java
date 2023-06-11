@@ -1,6 +1,7 @@
 package com.Prestamos.PrestamosSB.domain.User;
 
 import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -57,8 +58,8 @@ public class User   implements UserDetails {
 
 
 
+
     @Override
-    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
