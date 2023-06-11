@@ -1,6 +1,6 @@
 package com.Prestamos.PrestamosSB.infraestruture.Dto;
 
-import com.Prestamos.PrestamosSB.domain.Client;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -5,8 +5,8 @@ import com.Prestamos.PrestamosSB.application.create.LoanUpdate;
 import com.Prestamos.PrestamosSB.application.find.FindClient;
 import com.Prestamos.PrestamosSB.application.find.FindLoan;
 import com.Prestamos.PrestamosSB.domain.Balance;
-import com.Prestamos.PrestamosSB.domain.Client;
-import com.Prestamos.PrestamosSB.domain.Loan;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.LoanDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -72,7 +73,7 @@ public class LoanController {
 
 
     @PutMapping("/loan/{id}")
-    public ResponseEntity<HttpStatus>updateLoan(@RequestBody LoanDto loanRequest, @PathVariable Long id) {
+    public ResponseEntity<HttpStatus>updateLoan(@RequestBody LoanDto loanRequest, @PathVariable UUID id) {
         Client client = findClient.findClientById(loanRequest.getClientId());
         loanRequest.setClient(client);
         Loan loan  = loanRequest.getLoanFromDto();
@@ -88,7 +89,7 @@ public class LoanController {
 
 
     @DeleteMapping("/loan/{id}")
-    public  ResponseEntity<HttpStatus>deleteLoan(@PathVariable Long id){
+    public  ResponseEntity<HttpStatus>deleteLoan(@PathVariable UUID id){
 
         findPrestamos.findAndDeleteById(id);
 

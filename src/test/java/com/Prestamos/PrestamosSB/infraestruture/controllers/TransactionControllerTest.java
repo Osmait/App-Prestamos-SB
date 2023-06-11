@@ -1,6 +1,10 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
-import com.Prestamos.PrestamosSB.domain.*;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Client.ClientRepository;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Loan.LoanRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;

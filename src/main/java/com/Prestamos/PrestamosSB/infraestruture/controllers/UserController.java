@@ -2,7 +2,7 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.UserCreator;
 import com.Prestamos.PrestamosSB.application.find.FindUser;
-import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
 
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserResponse;

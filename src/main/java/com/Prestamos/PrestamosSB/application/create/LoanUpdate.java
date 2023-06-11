@@ -1,7 +1,7 @@
 package com.Prestamos.PrestamosSB.application.create;
 
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.LoanRepository;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Loan.LoanRepository;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.NotFoundException;
 
 import lombok.RequiredArgsConstructor;

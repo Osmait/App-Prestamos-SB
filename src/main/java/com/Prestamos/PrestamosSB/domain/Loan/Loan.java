@@ -1,7 +1,8 @@
-package com.Prestamos.PrestamosSB.domain;
+package com.Prestamos.PrestamosSB.domain.Loan;
 
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -24,8 +26,8 @@ import java.util.List;
 @Table(name = "loan")
 public class Loan  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private Double amount;
 
@@ -39,8 +41,8 @@ public class Loan  {
     @Column(name ="amount_of_payments",nullable = false)
     private Integer amountOfPayments;
 
-//    @Column(name = "status")
-//    private boolean status = false;
+    @Column(name = "status",columnDefinition = "boolean default false")
+    private boolean status ;
 
     @Column(name = "deleted",columnDefinition = "boolean default false")
     private  boolean deleted;

@@ -1,14 +1,14 @@
-package com.Prestamos.PrestamosSB.domain;
+package com.Prestamos.PrestamosSB.domain.Client;
 
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
-
 import java.util.List;
+import java.util.UUID;
 
 @Builder
 @NoArgsConstructor
@@ -18,8 +18,8 @@ import java.util.List;
 @Table(name = "clients")
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(length = 50 ,nullable = false)
     private String name;
@@ -39,9 +39,9 @@ public class Client {
     private  boolean deleted;
 
 
-//    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-//    @JsonManagedReference
-//    List<Loan> loans;
+    @OneToMany(mappedBy = "client")
+    @JsonManagedReference
+    List<Loan> loans;
 
     @ManyToOne
     @JsonBackReference

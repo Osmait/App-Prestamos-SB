@@ -1,8 +1,12 @@
 package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.domain.*;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
+import com.Prestamos.PrestamosSB.domain.Transaction.TransactionRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

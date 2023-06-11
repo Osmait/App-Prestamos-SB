@@ -3,7 +3,7 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import com.Prestamos.PrestamosSB.application.create.ClientCreator;
 import com.Prestamos.PrestamosSB.application.create.Upload;
 import com.Prestamos.PrestamosSB.application.find.FindClient;
-import com.Prestamos.PrestamosSB.domain.Client;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
 
 import com.Prestamos.PrestamosSB.infraestruture.Dto.ClientDto;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.BadRequest;
@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -55,7 +56,7 @@ public class ClientController {
     }
 
     @PostMapping("/client/upload/{id}")
-    public ResponseEntity<Map<String, String>> uploadImageClient( @RequestParam("file") MultipartFile imagen,@PathVariable Long id ) throws Exception {
+    public ResponseEntity<Map<String, String>> uploadImageClient( @RequestParam("file") MultipartFile imagen,@PathVariable UUID id ) throws Exception {
 
         File file = File.createTempFile("temp", null);
         imagen.transferTo(file);
@@ -69,7 +70,7 @@ public class ClientController {
 
 
     @DeleteMapping("/client/{id}")
-    public ResponseEntity<HttpStatus>deleteClient(@PathVariable Long id){
+    public ResponseEntity<HttpStatus>deleteClient(@PathVariable UUID id){
         findClient.findAndDeleteById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);

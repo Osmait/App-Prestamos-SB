@@ -2,8 +2,9 @@ package com.Prestamos.PrestamosSB.application.create;
 
 
 import com.Prestamos.PrestamosSB.application.find.FindUser;
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
+
+import com.Prestamos.PrestamosSB.domain.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.crypto.password.PasswordEncoder;

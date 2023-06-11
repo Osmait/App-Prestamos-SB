@@ -2,9 +2,9 @@ package com.Prestamos.PrestamosSB.application.create;
 
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.domain.Transaction;
-import com.Prestamos.PrestamosSB.domain.TransactionRepository;
-import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
+import com.Prestamos.PrestamosSB.domain.Transaction.TransactionRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,12 @@
 package com.Prestamos.PrestamosSB.infraestruture.Dto;
 
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.Transaction;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+import java.util.UUID;
 
 @Data
 public class TransactionDto {
@@ -15,7 +17,7 @@ public class TransactionDto {
     private Double amount;
 
     @NotNull(message = "loanId is require")
-    private Long loanId;
+    private UUID loanId;
 
     Loan loan;
 

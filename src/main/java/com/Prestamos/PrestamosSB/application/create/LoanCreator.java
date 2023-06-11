@@ -1,14 +1,13 @@
 package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.domain.Loan;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 
-import com.Prestamos.PrestamosSB.domain.LoanRepository;
-import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.Loan.LoanRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class LoanCreator {
     private final AuthService authService;
 
-    private final LoanRepository prestamoRepository;
+    private final LoanRepository loanRepository;
 
     public void create(Loan loan)  {
 
@@ -28,7 +27,7 @@ public class LoanCreator {
 
 
 //            loan.setUser(currentUserId);
-            prestamoRepository.save(loan);
+        loanRepository.save(loan);
 
 
     }

@@ -1,11 +1,11 @@
 package com.Prestamos.PrestamosSB.application.auth;
 
 
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
+
+import com.Prestamos.PrestamosSB.domain.User.UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

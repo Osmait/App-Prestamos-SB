@@ -1,8 +1,8 @@
-package com.Prestamos.PrestamosSB.domain;
+package com.Prestamos.PrestamosSB.domain.Transaction;
 
 import com.Prestamos.PrestamosSB.domain.Enums.TransactionType;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     @Column(name = "transaction_type")
     private TransactionType transactionType;

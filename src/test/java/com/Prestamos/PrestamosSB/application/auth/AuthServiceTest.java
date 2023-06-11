@@ -1,7 +1,7 @@
 package com.Prestamos.PrestamosSB.application.auth;
 
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
+import UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

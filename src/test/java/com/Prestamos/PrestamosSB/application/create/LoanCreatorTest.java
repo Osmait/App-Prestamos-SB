@@ -2,10 +2,10 @@ package com.Prestamos.PrestamosSB.application.create;
 
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.domain.Client;
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.LoanRepository;
-import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Loan.LoanRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -2,9 +2,9 @@ package com.Prestamos.PrestamosSB.application.find;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
 import com.Prestamos.PrestamosSB.domain.Balance;
-import com.Prestamos.PrestamosSB.domain.Loan;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 
-import com.Prestamos.PrestamosSB.domain.LoanRepository;
+import com.Prestamos.PrestamosSB.domain.Loan.LoanRepository;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.NotFoundException;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -26,13 +26,13 @@ public class FindLoan {
     private final AuthService authService;
 
     public List<Loan>findLoanByDate( ){
-        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }
 
         List<Loan> prestamoList =  new ArrayList<>();
-;
+
 //        prestamoList =  loanRepository.findAllByUserId(currentUserId)
 //                .orElse(new ArrayList<>());
 
@@ -53,7 +53,7 @@ public class FindLoan {
     }
 
     public List<Loan> FindAllLoan(Long id){
-        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }
@@ -64,7 +64,7 @@ public class FindLoan {
     }
 
     public List<Loan> FindAllLoanByUser(){
-        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }
@@ -88,10 +88,10 @@ public class FindLoan {
 
     }
 
-    public Loan findLoanById(Long id){
+    public Loan findLoanById(UUID id){
       return  loanRepository.findById(id).orElseThrow(()-> new NotFoundException("Loan Not Found"));
     }
-    public void findAndDeleteById(Long id){
+    public void findAndDeleteById(UUID id){
         loanRepository.deleteById(id);
     }
 

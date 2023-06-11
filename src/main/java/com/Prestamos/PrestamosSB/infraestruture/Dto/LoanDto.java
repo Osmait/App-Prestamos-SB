@@ -1,7 +1,7 @@
 package com.Prestamos.PrestamosSB.infraestruture.Dto;
 
-import com.Prestamos.PrestamosSB.domain.Client;
-import com.Prestamos.PrestamosSB.domain.Loan;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Data
 @Component
@@ -23,7 +24,7 @@ public class LoanDto {
     private Double amount;
 
     @NotNull(message = "clientId is require")
-    private Long clientId;
+    private UUID clientId;
 
     @NotNull
     private String paymentDate;

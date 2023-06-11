@@ -3,8 +3,8 @@ package com.Prestamos.PrestamosSB.infraestruture.controllers;
 import com.Prestamos.PrestamosSB.application.create.TransactionCreator;
 import com.Prestamos.PrestamosSB.application.find.FindLoan;
 import com.Prestamos.PrestamosSB.application.find.FindTransaction;
-import com.Prestamos.PrestamosSB.domain.Loan;
-import com.Prestamos.PrestamosSB.domain.Transaction;
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
+import com.Prestamos.PrestamosSB.domain.Transaction.Transaction;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.TransactionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class TransactionController {
     }
 
     @GetMapping("/transaction/{id}")
-    public ResponseEntity<List<Transaction>>getTransactionByLoanId(@PathVariable Long id){
+    public ResponseEntity<List<Transaction>>getTransactionByLoanId(@PathVariable UUID id){
         return ResponseEntity.ok().body(findTransaction.findAllTransaction(id));
     }
 
@@ -47,7 +48,7 @@ public class TransactionController {
         return ResponseEntity.ok().body(findTransaction.findAllTransactionbyUser());
     }
     @DeleteMapping("/transaction/{id}")
-    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable Long id)  {
+    public  ResponseEntity<HttpStatus>deleteTransaction(@PathVariable UUID id)  {
         findTransaction.findAndDeleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,8 +1,8 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 import com.Prestamos.PrestamosSB.application.create.UserCreator;
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
+import UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 

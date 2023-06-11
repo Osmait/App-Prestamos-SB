@@ -1,10 +1,10 @@
 package com.Prestamos.PrestamosSB.infraestruture.controllers;
 
 
-import com.Prestamos.PrestamosSB.domain.Client;
-import com.Prestamos.PrestamosSB.domain.ClientRepository;
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Client.ClientRepository;
+import com.Prestamos.PrestamosSB.domain.User.User;
+import UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.config.JwtService;
 import jakarta.transaction.Transactional;
 

@@ -1,11 +1,10 @@
 package com.Prestamos.PrestamosSB.application.create;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.application.find.FindUser;
-import com.Prestamos.PrestamosSB.domain.Client;
-import com.Prestamos.PrestamosSB.domain.ClientRepository;
+import com.Prestamos.PrestamosSB.domain.Client.Client;
+import com.Prestamos.PrestamosSB.domain.Client.ClientRepository;
 
-import com.Prestamos.PrestamosSB.domain.User;
+import com.Prestamos.PrestamosSB.domain.User.User;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class ClientCreator {
 
 
     private final ClientRepository clientRepository;
-//    private final FindUser findUser;
+
 
 
 

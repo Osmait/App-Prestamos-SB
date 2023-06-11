@@ -1,5 +1,6 @@
-package com.Prestamos.PrestamosSB.domain;
+package com.Prestamos.PrestamosSB.domain.User;
 
+import com.Prestamos.PrestamosSB.domain.Client.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -27,8 +28,8 @@ import java.util.*;
 public class User   implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false)
     private String name;

@@ -1,9 +1,9 @@
 package com.Prestamos.PrestamosSB.application.find;
 
 import com.Prestamos.PrestamosSB.application.auth.AuthService;
-import com.Prestamos.PrestamosSB.domain.User;
-import com.Prestamos.PrestamosSB.domain.UserRepository;
-import com.Prestamos.PrestamosSB.infraestruture.Dto.UserDto;
+import com.Prestamos.PrestamosSB.domain.User.User;
+
+import com.Prestamos.PrestamosSB.domain.User.UserRepository;
 import com.Prestamos.PrestamosSB.infraestruture.Dto.UserResponse;
 import com.Prestamos.PrestamosSB.infraestruture.controllers.exceptionController.exceptions.UnAuthorizedException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +41,7 @@ public class FindUser {
     }
 
     public User findProfile(){
-        Long currentUserId =  authService.getIdCurrentLoggedUser().getId();
+        UUID currentUserId =  authService.getIdCurrentLoggedUser().getId();
         if (currentUserId == null){
             throw new UnAuthorizedException("User Not Auth");
         }

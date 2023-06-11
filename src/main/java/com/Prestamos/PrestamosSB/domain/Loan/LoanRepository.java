@@ -1,6 +1,7 @@
-package com.Prestamos.PrestamosSB.domain;
+package com.Prestamos.PrestamosSB.domain.Loan;
 
 
+import com.Prestamos.PrestamosSB.domain.Loan.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,9 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface LoanRepository extends JpaRepository<Loan,Long> {
+public interface LoanRepository extends JpaRepository<Loan, UUID> {
 
 //    Optional<List<Loan>>findAllByPaymentDateBetween(LocalDateTime payment_date, LocalDateTime payment_date2);
 
